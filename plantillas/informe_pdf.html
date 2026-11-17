@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Informe {{ e.id }}</title>
+<style>
+  * { box-sizing:border-box }
+  body { margin:0; font-family:"Segoe UI","DejaVu Sans",Arial,sans-serif; color:#152033; font-size:11px; }
+  .portada { height:265mm; display:flex; flex-direction:column; justify-content:space-between; padding:16mm 10mm; background:linear-gradient(150deg,#0d1b33,#1b3a6b 55%,#0f5c63); color:#fff; border-radius:6px; page-break-after:always }
+  .portada small { letter-spacing:.2em; text-transform:uppercase; opacity:.7 }
+  .portada h1 { font-size:30px; margin:10px 0 6px } .portada h2 { font-size:18px; font-weight:400; opacity:.9; margin:0 }
+  .meta { display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; font-size:12px }
+  .meta span { display:block; opacity:.65; font-size:10px; text-transform:uppercase; letter-spacing:.08em }
+  .barra { display:flex; height:12px; border-radius:6px; overflow:hidden; margin:14px 0 6px; background:rgba(255,255,255,.15) }
+  .cifras { display:grid; grid-template-columns:repeat(6,1fr); gap:6px; text-align:center }
+  .cifras b { display:block; font-size:22px }
+  .tablero { display:flex; align-items:center; gap:10mm }
+  .tablero .lado { flex:1 }
+  .veredicto { display:inline-block; margin-top:10px; padding:5px 12px; border-radius:20px; background:rgba(255,255,255,.14); font-weight:700; font-size:12px }
+  .hoja { page-break-after:always }
+  .indice a { color:inherit; text-decoration:none }
+  .grafica { border:1px solid #dfe3eb; border-radius:6px; padding:8px 10px; margin-top:6px; page-break-inside:avoid }
+  .concl li { margin:6px 0; line-height:1.5 }
+  .cajaver { border:2px solid currentColor; border-radius:8px; padding:10px 14px; font-size:13px; font-weight:700; margin:10px 0 }
+  h3 { font-size:15px; margin:0 0 6px }
+  .caso { page-break-before:always }
+  .cab { display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #152033; padding-bottom:6px; margin-bottom:10px }
+  .sello { font-weight:700; padding:4px 10px; border-radius:20px; font-size:12px; border:1.5px solid currentColor }
+  .PASS{color:#0a7d48} .FAIL{color:#c0262d} .ERROR{color:#a65a00} .SKIPPED{color:#5a5fc7} .NOT_RUN{color:#6b7280}
+  table.ficha { width:100%; border-collapse:collapse; margin-bottom:10px }
+  table.ficha th { width:28%; text-align:left; background:#eef1f7; padding:5px 8px; border:1px solid #dfe3eb; font-weight:600 }
+  table.ficha td { padding:5px 8px; border:1px solid #dfe3eb }
+  .error { border:1.5px solid #c0262d; background:#fdf0f0; border-radius:6px; padding:8px 10px; margin:8px 0 }
+  .paso { border:1px solid #dfe3eb; border-radius:6px; padding:7px 9px; margin:6px 0; page-break-inside:avoid }
+  .paso.FAIL, .paso.ERROR { border-color:#c0262d; background:#fff7f7 }
+  .paso img { width:100%; border:1px solid #dfe3eb; border-radius:4px; margin-top:6px }
+  .paso .obs { color:#4a5468; margin-top:2px }
+  table.res { width:100%; border-collapse:collapse; margin-top:8px }
+  table.res th, table.res td { border:1px solid #dfe3eb; padding:5px 7px; text-align:left }
+  table.res th { background:#eef1f7 }
+</style></head>
+<body>
+<section class="portada">
+  <div>
+    <small>Proyecto de Automatización TQA · Sistema bajo prueba: SIBIO-RFID</small>
+    <h1>Reporte de automatización</h1>
+    <h2>{{ e.etiqueta }} · {{ e.id }}</h2>
+  </div>
+  <div class="tablero">
+    <div>{{ dona(r, 190) }}</div>
+    <div class="lado">
+    {% set t = r.total or 1 %}
+    <div class="barra">
+      <div style="width:{{ r.PASS*100/t }}%;background:#2fd08a"></div><div style="width:{{ r.FAIL*100/t }}%;background:#ff5a63"></div>
+      <div style="width:{{ r.ERROR*100/t }}%;background:#ffb02e"></div><div style="width:{{ r.SKIPPED*100/t }}%;background:#9ea3ff"></div>
+    </div>
+    <div class="cifras">
+      <div><b>{{ r.total }}</b>Casos</div><div><b>{{ r.PASS }}</b>✔ PASS</div><div><b>{{ r.FAIL }}</b>✖ FAIL</div>
+      <div><b>{{ r.ERROR }}</b>⚠ ERROR</div><div><b>{{ r.SKIPPED }}</b>⤼ SKIPPED</div><div><b>{{ r['NOT RUN'] }}</b>○ NOT RUN</div>
+    </div>
+    <div class="veredicto">Veredicto: {{ concl.veredicto }}</div>
+    </div>
+  </div>
+  <div class="meta">
+    <div><span>Tipo</span>{{ 'Funcional' if e.tipo == 'funcional' else 'No funcional' }}</div>
+    <div><span>Estado de la ejecución</span>{{ e.estado }}</div>
+    <div><span>Inicio</span>{{ e.inicio }}</div><div><span>Fin</span>{{ e.fin }}</div>
+    <div><span>Duración</span>{{ e.duracion_s }} s</div><div><span>Éxito</span>{{ r.exito_pct }} % de los casos ejecutados</div>
+    <div><span>Enviado a</span>{{ e.correo or '—' }}</div><div><span>Herramientas</span>pytest · Playwright · requests</div>
+  </div>
+</section>
+
+<section class="hoja indice">
+<h3>Índice y resumen de casos</h3>
+<p style="color:#4a5468;margin:0 0 4px">Cada fila lleva al detalle del caso, con sus pasos y capturas.</p>
+<table class="res"><tr><th>N.º</th><th>ID</th><th>Caso</th><th>Suites</th><th>Estado</th><th>Duración</th><th>Observación</th></tr>
+{% for c in casos %}<tr><td>{{ loop.index }}</td><td><a href="#{{ c.id }}">{{ c.id }}</a></td><td><a href="#{{ c.id }}">{{ c.nombre }}</a></td><td>{{ c.suites|join(', ') }}</td>
+<td class="{{ c.estado|replace(' ', '_') }}"><b>{{ ICONO[c.estado] }} {{ c.estado }}</b></td><td>{{ c.duracion_s ~ ' s' if c.duracion_s is defined else '—' }}</td><td>{{ c.observacion }}</td></tr>{% endfor %}
+</table>
+</section>
+
+<section>
+<h3>Conclusiones de la ejecución</h3>
+<div class="cajaver {{ concl.clase }}">Veredicto: {{ concl.veredicto }}</div>
+<ul class="concl">{% for p in concl.puntos %}<li>{{ p }}</li>{% endfor %}</ul>
+{% if e.resumen_ia %}<div style="border:1px solid #dfe3eb;border-left:4px solid #6b5bff;border-radius:6px;padding:8px 12px;margin-top:12px">
+<b>✦ Análisis de fallos con IA</b>{% for parrafo in e.resumen_ia.split('\n') if parrafo.strip() %}<p style="margin:6px 0 0">{{ parrafo }}</p>{% endfor %}</div>
+{% elif e.resumen_ia_error %}<p style="color:#667">{{ e.resumen_ia_error }}</p>{% endif %}
+<p style="color:#667;margin-top:14px">Leyenda: ✔ PASS aprobado · ✖ FAIL fallo funcional (defecto del sistema) · ⚠ ERROR fallo de infraestructura (entorno) · ⤼ SKIPPED omitido · ○ NOT RUN no ejecutado.</p>
+</section>
+
+{% for c in casos %}
+<section class="caso" id="{{ c.id }}">
+  <div class="cab"><h3>{{ c.id }} — {{ c.nombre }}</h3><span class="sello {{ c.estado|replace(' ', '_') }}">{{ ICONO[c.estado] }} {{ c.estado }} · {{ TEXTO[c.estado] }}</span></div>
+  <table class="ficha">
+    <tr><th>Módulo</th><td>{{ c.modulo }}</td></tr>
+    <tr><th>Tipo / suites</th><td>{{ 'Funcional' if c.tipo == 'funcional' else 'No funcional' }} · {{ c.suites|join(', ') }}</td></tr>
+    <tr><th>Objetivo</th><td>{{ c.objetivo }}</td></tr>
+    <tr><th>Precondiciones</th><td>{{ c.precondiciones }}</td></tr>
+    <tr><th>Datos de prueba</th><td>{{ c.datos }}</td></tr>
+    <tr><th>Resultado esperado</th><td>{{ c.resultado_esperado }}</td></tr>
+    <tr><th>Duración</th><td>{{ c.duracion_s if c.duracion_s is defined else '—' }} s · fin {{ c.fin if c.fin is defined else '—' }}</td></tr>
+  </table>
+  {% if c.estado in ('FAIL','ERROR') %}
+  <div class="error"><b>{{ TEXTO[c.estado] }}{% if c.paso_fallido %} en el paso {{ c.paso_fallido }}{% endif %}:</b> {{ c.observacion }}</div>
+  {% elif c.estado in ('SKIPPED','NOT RUN') %}
+  <div class="error" style="border-color:#9aa;background:#f6f7f9"><b>{{ TEXTO[c.estado] }}:</b> {{ c.observacion }}</div>
+  {% endif %}
+  {% for p in c.pasos %}
+  <div class="paso {{ p.estado }}"><b class="{{ p.estado }}">{{ ICONO.get(p.estado, '•') }} Paso {{ p.n }}:</b> {{ p.accion }}
+    <div class="obs">Observado: {{ p.observado }} · {{ p.ms }} ms</div>
+    {% if p.grafica %}{{ grafica(p.grafica) }}{% endif %}
+    {% if p.img %}<img src="{{ p.img }}" alt="Captura del paso {{ p.n }}">{% endif %}
+  </div>
+  {% endfor %}
+</section>
+{% endfor %}
+</body></html>

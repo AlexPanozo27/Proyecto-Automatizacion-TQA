@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte {{ e.id }} – {{ e.etiqueta }}</title>
+<style>
+  :root { --tinta:#152033; --suave:#5b6578; --linea:#e2e6ee; --fondo:#f5f7fb; --pass:#0a7d48; --fail:#c0262d; --error:#a65a00; --skip:#5a5fc7; --nr:#6b7280; }
+  * { box-sizing:border-box }
+  body { margin:0; font-family:"Segoe UI",system-ui,Arial,sans-serif; color:var(--tinta); background:var(--fondo); }
+  main { max-width:1100px; margin:0 auto; padding:28px 18px 48px; }
+  header { background:linear-gradient(120deg,#0d1b33,#1b3a6b 60%,#0f5c63); color:#fff; border-radius:16px; padding:24px 26px; }
+  header small { opacity:.75; letter-spacing:.12em; text-transform:uppercase; font-size:11px }
+  header h1 { margin:6px 0 4px; font-size:24px }
+  header p { margin:0; opacity:.85; font-size:14px }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:16px 0 22px }
+  .kpi { background:#fff; border:1px solid var(--linea); border-radius:12px; padding:12px 14px }
+  .kpi b { display:block; font-size:24px } .kpi span { font-size:12px; color:var(--suave) }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--linea); border-radius:12px; overflow:hidden; font-size:13.5px }
+  th { text-align:left; background:#eef1f7; padding:10px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--suave) }
+  td { padding:10px 12px; border-top:1px solid var(--linea); vertical-align:top }
+  .est { font-weight:700; white-space:nowrap } .PASS{color:var(--pass)} .FAIL{color:var(--fail)} .ERROR{color:var(--error)} .SKIPPED{color:var(--skip)} .NOT_RUN{color:var(--nr)}
+  details { background:#fff; border:1px solid var(--linea); border-radius:12px; margin:10px 0; padding:10px 14px }
+  summary { cursor:pointer; font-weight:600 }
+  ol { margin:8px 0 0; padding-left:20px; font-size:13px } li { margin:4px 0 } li em { color:var(--suave); font-style:normal }
+  .grafica { border:1px solid var(--linea); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:12.5px }
+  h2 { font-size:17px; margin:28px 0 10px }
+  @media (max-width:640px){ td:nth-child(3), th:nth-child(3){ display:none } }
+</style>
+</head>
+<body><main>
+<header style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+  <div>{{ dona(r, 120) }}</div><div style="flex:1;min-width:240px">
+  <small>Reporte de automatización · SIBIO-RFID</small>
+  <h1>{{ e.etiqueta }} — {{ e.id }}</h1>
+  <p>Inicio {{ e.inicio }} · Fin {{ e.fin }} · Duración {{ e.duracion_s }} s · Estado de la ejecución: <b>{{ e.estado }}</b></p>
+  <p style="margin-top:8px"><b>Veredicto: {{ concl.veredicto }}</b></p></div>
+</header>
+<section class="kpis">
+  <div class="kpi"><b>{{ r.total }}</b><span>Casos</span></div>
+  <div class="kpi"><b class="PASS">{{ r.PASS }}</b><span>✔ PASS</span></div>
+  <div class="kpi"><b class="FAIL">{{ r.FAIL }}</b><span>✖ FAIL (funcional)</span></div>
+  <div class="kpi"><b class="ERROR">{{ r.ERROR }}</b><span>⚠ ERROR (infraestructura)</span></div>
+  <div class="kpi"><b class="SKIPPED">{{ r.SKIPPED }}</b><span>⤼ SKIPPED</span></div>
+  <div class="kpi"><b class="NOT_RUN">{{ r['NOT RUN'] }}</b><span>○ NOT RUN</span></div>
+  <div class="kpi"><b>{{ r.exito_pct }} %</b><span>Éxito (PASS / ejecutados)</span></div>
+</section>
+{% if e.resumen_ia %}<section style="background:#fff;border:1px solid var(--linea);border-left:4px solid #6b5bff;border-radius:12px;padding:14px 18px;margin-bottom:18px">
+  <b>✦ Análisis de fallos con IA</b>
+  {% for parrafo in e.resumen_ia.split('\n') if parrafo.strip() %}<p style="margin:8px 0 0;font-size:13.5px">{{ parrafo }}</p>{% endfor %}
+</section>{% endif %}
+<table>
+  <thead><tr><th>ID</th><th>Nombre del caso</th><th>Tipo / suite</th><th>Estado</th><th>Observación</th></tr></thead>
+  <tbody>
+  {% for c in casos %}
+    <tr><td><b>{{ c.id }}</b></td><td>{{ c.nombre }}</td>
+      <td>{{ 'Funcional' if c.tipo == 'funcional' else 'No funcional' }} · {{ c.suites|join(', ') }}</td>
+      <td class="est {{ c.estado|replace(' ', '_') }}">{{ ICONO[c.estado] }} {{ c.estado }}<br><small style="font-weight:400">{{ TEXTO[c.estado] }}</small></td>
+      <td>{{ c.observacion }}{% if c.paso_fallido %}<br><small>Paso fallido: {{ c.paso_fallido }}</small>{% endif %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<h2>Conclusiones</h2>
+<ul style="background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 18px 14px 34px;font-size:13.5px;margin:0">{% for p in concl.puntos %}<li>{{ p }}</li>{% endfor %}</ul>
+<h2>Pasos ejecutados por caso</h2>
+{% for c in casos %}
+<details {% if c.estado in ('FAIL','ERROR') %}open{% endif %}>
+  <summary><span class="{{ c.estado|replace(' ', '_') }}">{{ ICONO[c.estado] }} {{ c.estado }}</span> · {{ c.id }} — {{ c.nombre }}</summary>
+  {% if c.pasos %}<ol>{% for p in c.pasos %}<li><span class="{{ p.estado }}">{{ ICONO.get(p.estado, '•') }}</span> {{ p.accion }} <em>→ {{ p.observado }} ({{ p.ms }} ms)</em>{% if p.grafica %}{{ grafica(p.grafica) }}{% endif %}</li>{% endfor %}</ol>
+  {% else %}<p style="font-size:13px;color:var(--suave)">{{ c.observacion }}</p>{% endif %}
+</details>
+{% endfor %}
+<p style="color:var(--suave);font-size:12px;margin-top:24px">Documento generado automáticamente por la plataforma de automatización TQA. Los estados se indican con texto e ícono, no solo con color.</p>
+</main></body></html>

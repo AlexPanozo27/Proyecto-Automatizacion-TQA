@@ -1,5 +1,25 @@
+# Secretos (nunca se suben)
 .env
-venv/
+.env.*
+!config/config.example.env
+
+# Reportes generados y respaldos locales
+reportes/
+backup_antes_*/
+*.bak
+*.bak*
+
+# Python
 __pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
 *.db
-reportes/resultados/
+
+# Node
+node_modules/
+
+# Notas locales de agentes
+AGENTS.md
+CLAUDE.md

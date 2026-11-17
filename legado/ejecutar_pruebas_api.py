@@ -49,9 +49,9 @@ def tc(id_):
         return fn
     return deco
 
-ADM = login("admin", "Admin12345")
-OPE = login("jperez", "Demo12345")
-SUP = login("agutierrez", "Demo12345")
+ADM = login("admin", os.environ.get("SIBIO_ADMIN_CLAVE", ""))
+OPE = login("jperez", os.environ.get("SIBIO_OPERADOR_CLAVE", ""))
+SUP = login("agutierrez", os.environ.get("SIBIO_SUPERVISOR_CLAVE", ""))
 db = lambda: sqlite3.connect(DB)
 puntos = {p["nombre"]: p for p in call("GET", "/puntos-control", ADM)[1]}
 def api_key(nombre):
@@ -60,7 +60,7 @@ def api_key(nombre):
 # ---------------- Autenticación ----------------
 @tc("TC-001")
 def _(p):
-    c, b = call("POST", "/auth/login", json={"username": "admin", "password": "Admin12345"})
+    c, b = call("POST", "/auth/login", json={"username": "admin", "password": os.environ.get("SIBIO_ADMIN_CLAVE", "")})
     p("Iniciar sesión con admin / clave válida", f"HTTP {c}; token JWT recibido ({len(b.get('token',''))} car.); rol={b.get('usuario',{}).get('rol')}", c == 200 and b.get("token") and b["usuario"]["rol"] == "administrador")
     c, b = call("GET", "/auth/yo", b.get("token"))
     p("Consultar /auth/yo con el token", f"HTTP {c}; username={b.get('username')}", c == 200 and b.get("username") == "admin")
@@ -69,7 +69,7 @@ def _(p):
 def _(p):
     c, b = call("POST", "/auth/login", json={"username": "admin", "password": "ClaveMala99"})
     p("Iniciar sesión con contraseña incorrecta", f"HTTP {c}; mensaje: {b.get('error')}", c == 401 and "incorrectos" in b.get("error", ""))
-    c, b = call("POST", "/auth/login", json={"username": "noexiste", "password": "Admin12345"})
+    c, b = call("POST", "/auth/login", json={"username": "noexiste", "password": os.environ.get("SIBIO_ADMIN_CLAVE", "")})
     p("Iniciar sesión con usuario inexistente", f"HTTP {c}; mensaje: {b.get('error')} (mismo mensaje, no revela si el usuario existe)", c == 401 and "incorrectos" in b.get("error", ""))
     c, b = call("POST", "/auth/login", json={})
     p("Iniciar sesión con campos vacíos", f"HTTP {c}; mensaje: {b.get('error')}", c == 401)
@@ -129,8 +129,8 @@ def _(p):
     base = {"nombre_completo": "Prueba Política", "rol": "operador"}
     c, b = call("POST", "/usuarios", ADM, json={**base, "username": "solonum", "password": "11111111"})
     p("Crear usuario con contraseña solo numérica '11111111'", f"HTTP {c}; {b.get('mensaje') or b.get('error')}", c == 400)
-    c, b = call("POST", "/usuarios", ADM, json={**base, "username": "facil", "password": "Demo12345"})
-    p("Crear usuario con la contraseña de la lista prohibida 'Demo12345'", f"HTTP {c}; {b.get('mensaje') or b.get('error')}", c == 400)
+    c, b = call("POST", "/usuarios", ADM, json={**base, "username": "facil", "password": os.environ.get("SIBIO_OPERADOR_CLAVE", "")})
+    p("Crear usuario con la contraseña de la lista prohibida '(clave demo prohibida)'", f"HTTP {c}; {b.get('mensaje') or b.get('error')}", c == 400)
     t = login("lim8", "Abcd1234")
     c, b = call("POST", "/auth/cambiar-clave", t, json={"actual": "Abcd1234", "nueva": "22222222"})
     p("Comparación: cambiar clave a '22222222' desde 'Mi cuenta'", f"HTTP {c}; {b.get('error')}", c == 400)
