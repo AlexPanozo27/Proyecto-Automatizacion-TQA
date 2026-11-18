@@ -1,0 +1,11 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.0, pytest-9.2.0, pluggy-1.7.0 -- C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\python.exe
+rootdir: C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA
+configfile: pytest.ini
+plugins: anyio-4.8.0, locust-2.47.0
+collecting ... collected 2 items
+
+complementos/selenium/test_login_selenium.py::test_tc_e2e_01_login_valido_selenium PASSED [ 50%]
+complementos/selenium/test_login_selenium.py::test_tc_e2e_02_clave_incorrecta_selenium PASSED [100%]
+
+============================= 2 passed in 19.98s ==============================

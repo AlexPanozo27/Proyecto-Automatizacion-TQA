@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte EJ-20261117-143614-EC – Seguridad</title>
+<style>
+  :root { --tinta:#152033; --suave:#5b6578; --linea:#e2e6ee; --fondo:#f5f7fb; --pass:#0a7d48; --fail:#c0262d; --error:#a65a00; --skip:#5a5fc7; --nr:#6b7280; }
+  * { box-sizing:border-box }
+  body { margin:0; font-family:"Segoe UI",system-ui,Arial,sans-serif; color:var(--tinta); background:var(--fondo); }
+  main { max-width:1100px; margin:0 auto; padding:28px 18px 48px; }
+  header { background:linear-gradient(120deg,#0d1b33,#1b3a6b 60%,#0f5c63); color:#fff; border-radius:16px; padding:24px 26px; }
+  header small { opacity:.75; letter-spacing:.12em; text-transform:uppercase; font-size:11px }
+  header h1 { margin:6px 0 4px; font-size:24px }
+  header p { margin:0; opacity:.85; font-size:14px }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:16px 0 22px }
+  .kpi { background:#fff; border:1px solid var(--linea); border-radius:12px; padding:12px 14px }
+  .kpi b { display:block; font-size:24px } .kpi span { font-size:12px; color:var(--suave) }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--linea); border-radius:12px; overflow:hidden; font-size:13.5px }
+  th { text-align:left; background:#eef1f7; padding:10px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--suave) }
+  td { padding:10px 12px; border-top:1px solid var(--linea); vertical-align:top }
+  .est { font-weight:700; white-space:nowrap } .PASS{color:var(--pass)} .FAIL{color:var(--fail)} .ERROR{color:var(--error)} .SKIPPED{color:var(--skip)} .NOT_RUN{color:var(--nr)}
+  details { background:#fff; border:1px solid var(--linea); border-radius:12px; margin:10px 0; padding:10px 14px }
+  summary { cursor:pointer; font-weight:600 }
+  ol { margin:8px 0 0; padding-left:20px; font-size:13px } li { margin:4px 0 } li em { color:var(--suave); font-style:normal }
+  .grafica { border:1px solid var(--linea); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:12.5px }
+  h2 { font-size:17px; margin:28px 0 10px }
+  @media (max-width:640px){ td:nth-child(3), th:nth-child(3){ display:none } }
+</style>
+</head>
+<body><main>
+<header style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+  <div><svg width="120" height="120" viewBox="0 0 150 150"><circle cx="75" cy="75" r="54" fill="none" stroke="rgba(128,128,128,.25)" stroke-width="17"/><circle cx="75" cy="75" r="54" fill="none" stroke="#2fd08a" stroke-width="17" stroke-dasharray="339.29 0.00" stroke-dashoffset="-0.00" transform="rotate(-90 75 75)"/><text x="75" y="74" text-anchor="middle" font-size="27" font-weight="700" fill="#fff">100%</text><text x="75" y="92" text-anchor="middle" font-size="10" fill="#fff" opacity=".75">aprobados</text></svg></div><div style="flex:1;min-width:240px">
+  <small>Reporte de automatización · SIBIO-RFID</small>
+  <h1>Seguridad — EJ-20261117-143614-EC</h1>
+  <p>Inicio 2026-11-17 14:36:14 · Fin 2026-11-17 14:36:23 · Duración 8.6 s · Estado de la ejecución: <b>finalizada</b></p>
+  <p style="margin-top:8px"><b>Veredicto: APTA: la versión probada cumple los casos ejecutados.</b></p></div>
+</header>
+<section class="kpis">
+  <div class="kpi"><b>8</b><span>Casos</span></div>
+  <div class="kpi"><b class="PASS">8</b><span>✔ PASS</span></div>
+  <div class="kpi"><b class="FAIL">0</b><span>✖ FAIL (funcional)</span></div>
+  <div class="kpi"><b class="ERROR">0</b><span>⚠ ERROR (infraestructura)</span></div>
+  <div class="kpi"><b class="SKIPPED">0</b><span>⤼ SKIPPED</span></div>
+  <div class="kpi"><b class="NOT_RUN">0</b><span>○ NOT RUN</span></div>
+  <div class="kpi"><b>100 %</b><span>Éxito (PASS / ejecutados)</span></div>
+</section>
+
+<table>
+  <thead><tr><th>ID</th><th>Nombre del caso</th><th>Tipo / suite</th><th>Estado</th><th>Observación</th></tr></thead>
+  <tbody>
+  
+    <tr><td><b>TC-SEG-01</b></td><td>Cadena de auditoría con SHA-256 íntegra y bien enlazada</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>2 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-02</b></td><td>La bitácora de auditoría no se puede borrar ni modificar por la API</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>5 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-03</b></td><td>Bloqueo por fuerza bruta tras 5 contraseñas incorrectas</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>2 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-04</b></td><td>Verificación en dos pasos (2FA) obligatoria para el administrador</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>2 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-05</b></td><td>Inyección SQL en el buscador y en el login no tiene efecto</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>5 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-06</b></td><td>Al cerrar sesión el token deja de servir aunque alguien lo haya copiado</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>3 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-07</b></td><td>La API no expone contraseñas, secretos 2FA ni plantillas biométricas</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>3 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-SEG-08</b></td><td>Los errores no revelan detalles internos del servidor</td>
+      <td>No funcional · seguridad</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>5 pasos verificados</td></tr>
+  
+  </tbody>
+</table>
+<h2>Conclusiones</h2>
+<ul style="background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 18px 14px 34px;font-size:13.5px;margin:0"><li>Se ejecutaron 8 de 8 casos y 8 aprobaron: 100 % de éxito sobre los casos ejecutados.</li><li>No se encontró ningún fallo funcional en los casos ejecutados.</li><li>El caso más lento fue TC-SEG-05 con 1.12 s; la ejecución completa duró 8.6 s.</li></ul>
+<h2>Pasos ejecutados por caso</h2>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-01 — Cadena de auditoría con SHA-256 íntegra y bien enlazada</summary>
+  <ol><li><span class="PASS">✔</span> Pedir a SIBIO que verifique toda la cadena (GET /api/auditoria/integridad) <em>→ HTTP 200; algoritmo HMAC-SHA256; 675 de 675 registros sellados; problemas=0; ancla=coincide; 67.5 ms (188 ms)</em></li><li><span class="PASS">✔</span> Comprobar a mano el enlace: huella_anterior de cada registro = huella del registro previo <em>→ 20 registros revisados; enlaces rotos: 0; huellas de 64 hex (256 bits): True; último eslabón 675 (114 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-02 — La bitácora de auditoría no se puede borrar ni modificar por la API</summary>
+  <ol><li><span class="PASS">✔</span> Intentar DELETE /api/auditoria/1 como administrador <em>→ HTTP 404 (6 ms)</em></li><li><span class="PASS">✔</span> Intentar PUT /api/auditoria/1 como administrador <em>→ HTTP 404 (6 ms)</em></li><li><span class="PASS">✔</span> Intentar PATCH /api/auditoria/1 como administrador <em>→ HTTP 404 (7 ms)</em></li><li><span class="PASS">✔</span> Intentar DELETE /api/auditoria como administrador <em>→ HTTP 405 (7 ms)</em></li><li><span class="PASS">✔</span> Confirmar que la cadena sigue íntegra <em>→ ok=True; problemas=0 (161 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-03 — Bloqueo por fuerza bruta tras 5 contraseñas incorrectas</summary>
+  <ol><li><span class="PASS">✔</span> Enviar 5 contraseñas incorrectas para &#39;qa_fuerza_8388&#39; <em>→ Intentos restantes informados: [4, 3, 2, 1, &#39;HTTP 429&#39;] (647 ms)</em></li><li><span class="PASS">✔</span> Sexto intento, ahora con cualquier contraseña: debe seguir bloqueado <em>→ HTTP 429: Cuenta bloqueada por intentos fallidos. Intente de nuevo en 5 min (segundos=300) (132 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-04 — Verificación en dos pasos (2FA) obligatoria para el administrador</summary>
+  <ol><li><span class="PASS">✔</span> Login del administrador con la contraseña correcta <em>→ HTTP 200; requiere_2fa=True; token entregado: False (441 ms)</em></li><li><span class="PASS">✔</span> Enviar un código 2FA falso (000000) <em>→ HTTP 400: El código no es correcto; token entregado: False (151 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-05 — Inyección SQL en el buscador y en el login no tiene efecto</summary>
+  <ol><li><span class="PASS">✔</span> Contar los reclusos visibles con una búsqueda normal (sin filtro) <em>→ 17 reclusos visibles (152 ms)</em></li><li><span class="PASS">✔</span> Buscar &#34;&#39; OR 1=1 --&#34; (GET /api/reclusos?q=…) <em>→ HTTP 200; resultados: 0; fuga de error interno: no (78 ms)</em></li><li><span class="PASS">✔</span> Buscar &#34;&#39;; DROP TABLE reclusos; --&#34; (GET /api/reclusos?q=…) <em>→ HTTP 200; resultados: 0; fuga de error interno: no (189 ms)</em></li><li><span class="PASS">✔</span> La tabla sigue existiendo: la búsqueda normal devuelve lo mismo que antes <em>→ 17 reclusos visibles (antes 17) (206 ms)</em></li><li><span class="PASS">✔</span> Login con usuario &#34;admin&#39; --&#34; y contraseña cualquiera <em>→ HTTP 401; token entregado: False (124 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-06 — Al cerrar sesión el token deja de servir aunque alguien lo haya copiado</summary>
+  <ol><li><span class="PASS">✔</span> Usar el token del operador (GET /api/reclusos) <em>→ HTTP 200 (95 ms)</em></li><li><span class="PASS">✔</span> Cerrar sesión (POST /api/auth/salir) <em>→ HTTP 200: Sesión cerrada (91 ms)</em></li><li><span class="PASS">✔</span> Reusar el mismo token copiado <em>→ HTTP 401: Sesión cerrada. Vuelva a iniciar sesión. (código sesion_cerrada) (73 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-07 — La API no expone contraseñas, secretos 2FA ni plantillas biométricas</summary>
+  <ol><li><span class="PASS">✔</span> Revisar GET /api/usuarios (administrador) <em>→ HTTP 200; campos sensibles: ninguno; hashes de contraseña: 0; bloques binarios largos: 0 (1 ms)</em></li><li><span class="PASS">✔</span> Revisar GET /api/reclusos (operador) <em>→ HTTP 200; campos sensibles: ninguno; hashes de contraseña: 0; bloques binarios largos: 0 (0 ms)</em></li><li><span class="PASS">✔</span> Revisar GET /api/reclusos/14 (ficha) <em>→ HTTP 200; campos sensibles: ninguno; hashes de contraseña: 0; bloques binarios largos: 0 (0 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-SEG-08 — Los errores no revelan detalles internos del servidor</summary>
+  <ol><li><span class="PASS">✔</span> Login con JSON roto: POST /api/auth/login <em>→ HTTP 401; fuga de detalle interno: no (124 ms)</em></li><li><span class="PASS">✔</span> Recluso inexistente: GET /api/reclusos/999999999 <em>→ HTTP 404; fuga de detalle interno: no (102 ms)</em></li><li><span class="PASS">✔</span> Id no numérico: GET /api/reclusos/abc <em>→ HTTP 404; fuga de detalle interno: no (5 ms)</em></li><li><span class="PASS">✔</span> Recluso con tipos inválidos: POST /api/reclusos <em>→ HTTP 400; fuga de detalle interno: no (90 ms)</em></li><li><span class="PASS">✔</span> Resumen <em>→ Sin fugas de información. Ninguna respuesta HTTP 500. (0 ms)</em></li></ol>
+  
+</details>
+
+<p style="color:var(--suave);font-size:12px;margin-top:24px">Documento generado automáticamente por la plataforma de automatización TQA. Los estados se indican con texto e ícono, no solo con color.</p>
+</main></body></html>

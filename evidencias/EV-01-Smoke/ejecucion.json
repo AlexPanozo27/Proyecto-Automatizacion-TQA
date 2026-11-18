@@ -1,0 +1,269 @@
+{
+ "id": "EJ-20261117-024200-OR",
+ "tipo": "funcional",
+ "suite": "smoke",
+ "etiqueta": "Smoke",
+ "correo": "[correo oculto]",
+ "estado": "finalizada",
+ "creada": "2026-11-17 02:42:00",
+ "inicio": "2026-11-17 02:42:00",
+ "fin": "2026-11-17 02:42:36",
+ "duracion_s": 35.6,
+ "actual": null,
+ "casos": [
+  {
+   "id": "TC-API-01",
+   "nombre": "Inicio de sesión con credenciales válidas",
+   "suites": [
+    "smoke",
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Autenticación",
+   "objetivo": "Comprobar que un usuario válido obtiene una sesión (token) y su rol.",
+   "precondiciones": "SIBIO-RFID encendido con datos de demostración.",
+   "datos": "Usuario: qa_admin / contraseña de demostración",
+   "resultado_esperado": "HTTP 200 (con código 2FA si el administrador lo tiene), token y rol 'administrador'; /auth/yo devuelve el mismo usuario.",
+   "estado": "PASS",
+   "observacion": "4 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Enviar usuario y contraseña del administrador (POST /api/auth/login)",
+     "observado": "HTTP 200; pide código 2FA",
+     "estado": "PASS",
+     "ms": 349,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Enviar el código de 6 dígitos del autenticador (POST /api/auth/2fa/verificar)",
+     "observado": "HTTP 200; código aceptado",
+     "estado": "PASS",
+     "ms": 326,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Comprobar el token y el rol recibidos",
+     "observado": "token de 276 caracteres; rol=administrador",
+     "estado": "PASS",
+     "ms": 0,
+     "captura": null
+    },
+    {
+     "n": 4,
+     "accion": "Consultar GET /api/auth/yo con el token recibido",
+     "observado": "HTTP 200; usuario=qa_admin",
+     "estado": "PASS",
+     "ms": 113,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.8,
+   "fin": "2026-11-17 02:42:04"
+  },
+  {
+   "id": "TC-API-03",
+   "nombre": "Rutas protegidas rechazan peticiones sin sesión o con token alterado",
+   "suites": [
+    "smoke",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Seguridad",
+   "objetivo": "Comprobar que la API no entrega datos sin un token válido.",
+   "precondiciones": "SIBIO-RFID encendido.",
+   "datos": "Sin cabecera Authorization; token falso",
+   "resultado_esperado": "HTTP 401 en ambos casos.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "GET /api/reclusos sin cabecera Authorization",
+     "observado": "HTTP 401: Token no enviado",
+     "estado": "PASS",
+     "ms": 5,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "GET /api/reclusos con un token alterado",
+     "observado": "HTTP 401: Token inválido",
+     "estado": "PASS",
+     "ms": 5,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.02,
+   "fin": "2026-11-17 02:42:04"
+  },
+  {
+   "id": "TC-API-07",
+   "nombre": "Lectura RFID simulada en zona restringida genera alerta crítica",
+   "suites": [
+    "integration",
+    "regression",
+    "smoke"
+   ],
+   "tipo": "funcional",
+   "modulo": "Manillas RFID y Alertas",
+   "objetivo": "Comprobar la integración lector RFID → evento → alerta (sin hardware, lector simulado por API).",
+   "precondiciones": "Zona 'Muro perimetral norte' (restringida, id 7); manilla A3:5F:12:9C asignada a SP-0412.",
+   "datos": "Lector QA creado por la prueba; codigo_rfid=A3:5F:12:9C",
+   "resultado_esperado": "La lectura reconoce al recluso y aparece una alerta crítica de zona restringida.",
+   "estado": "PASS",
+   "observacion": "3 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Crear un lector simulado en la zona restringida (POST /api/puntos-control)",
+     "observado": "HTTP 201; punto id=25",
+     "estado": "PASS",
+     "ms": 182,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "El lector envía la lectura de la manilla A3:5F:12:9C",
+     "observado": "HTTP 200; reconocido=True; zona=Muro perimetral norte",
+     "estado": "PASS",
+     "ms": 245,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Buscar la alerta crítica de zona restringida en GET /api/alertas",
+     "observado": "HTTP 200; 3 alerta(s) crítica(s) de zona restringida",
+     "estado": "PASS",
+     "ms": 226,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.67,
+   "fin": "2026-11-17 02:42:05"
+  },
+  {
+   "id": "TC-API-09",
+   "nombre": "Centro de monitoreo entrega los indicadores (KPI)",
+   "suites": [
+    "smoke",
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Centro de monitoreo",
+   "objetivo": "Comprobar que el tablero devuelve los KPI principales.",
+   "precondiciones": "Sesión de administrador.",
+   "datos": "GET /api/dashboard",
+   "resultado_esperado": "HTTP 200 con los KPI de reclusos, manillas, eventos y alertas.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Consultar GET /api/dashboard",
+     "observado": "HTTP 200 en 228 ms; KPI: {'alertas_criticas': 20, 'alertas_pendientes': 31, 'con_perfil': 3, 'eventos': 127, 'eventos_fallidos': 31, 'manillas_asignadas': 11, 'manillas_en_linea': 1, 'reclusos': 16}",
+     "estado": "PASS",
+     "ms": 228,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Comprobar que los KPI son números no negativos",
+     "observado": "todos válidos",
+     "estado": "PASS",
+     "ms": 0,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.24,
+   "fin": "2026-11-17 02:42:05"
+  },
+  {
+   "id": "TC-E2E-01",
+   "nombre": "Inicio de sesión en el panel y Centro de monitoreo visible",
+   "suites": [
+    "smoke",
+    "e2e",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Panel web · Autenticación",
+   "objetivo": "Comprobar de punta a punta que el administrador entra al panel y ve el Centro de monitoreo.",
+   "precondiciones": "SIBIO-RFID encendido con el panel compilado y datos de demostración.",
+   "datos": "Usuario qa_admin / contraseña y código 2FA de la app autenticadora (si lo tiene)",
+   "resultado_esperado": "Se muestra el título 'Centro de monitoreo' y el KPI 'Reclusos activos'.",
+   "estado": "PASS",
+   "observacion": "5 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Abrir el panel y escribir usuario y contraseña (administrador: qa_admin)",
+     "observado": "Formulario enviado",
+     "estado": "PASS",
+     "ms": 2826,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR\\capturas\\TC-E2E-01\\paso01.jpg"
+    },
+    {
+     "n": 2,
+     "accion": "Escribir el código de 6 dígitos del autenticador (2FA)",
+     "observado": "Código escrito; el panel lo verifica solo al completar los 6 dígitos",
+     "estado": "PASS",
+     "ms": 17895,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR\\capturas\\TC-E2E-01\\paso02.jpg"
+    },
+    {
+     "n": 3,
+     "accion": "Verificar que se entró al sistema (menú lateral visible)",
+     "observado": "Sesión iniciada; menú lateral visible",
+     "estado": "PASS",
+     "ms": 2196,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR\\capturas\\TC-E2E-01\\paso03.jpg"
+    },
+    {
+     "n": 4,
+     "accion": "Verificar el título 'Centro de monitoreo'",
+     "observado": "Título visible",
+     "estado": "PASS",
+     "ms": 11,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR\\capturas\\TC-E2E-01\\paso04.jpg"
+    },
+    {
+     "n": 5,
+     "accion": "Verificar el indicador 'Reclusos activos'",
+     "observado": "KPI visible",
+     "estado": "PASS",
+     "ms": 11,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR\\capturas\\TC-E2E-01\\paso05.jpg"
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 24.14,
+   "fin": "2026-11-17 02:42:34"
+  }
+ ],
+ "informe": {
+  "html": "Reporte-EJ-20261117-024200-OR.html",
+  "pdf": "Reporte-EJ-20261117-024200-OR.pdf"
+ },
+ "correo_estado": "enviado",
+ "correo_detalle": "Enviado a [correo oculto]",
+ "salida": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024200-OR",
+ "resumen": {
+  "PASS": 5,
+  "FAIL": 0,
+  "ERROR": 0,
+  "SKIPPED": 0,
+  "NOT RUN": 0,
+  "total": 5,
+  "exito_pct": 100
+ },
+ "resumen_ia": null
+}

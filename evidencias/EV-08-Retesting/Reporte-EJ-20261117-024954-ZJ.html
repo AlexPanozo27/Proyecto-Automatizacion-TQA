@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte EJ-20261117-024954-ZJ – Retesting de defectos</title>
+<style>
+  :root { --tinta:#152033; --suave:#5b6578; --linea:#e2e6ee; --fondo:#f5f7fb; --pass:#0a7d48; --fail:#c0262d; --error:#a65a00; --skip:#5a5fc7; --nr:#6b7280; }
+  * { box-sizing:border-box }
+  body { margin:0; font-family:"Segoe UI",system-ui,Arial,sans-serif; color:var(--tinta); background:var(--fondo); }
+  main { max-width:1100px; margin:0 auto; padding:28px 18px 48px; }
+  header { background:linear-gradient(120deg,#0d1b33,#1b3a6b 60%,#0f5c63); color:#fff; border-radius:16px; padding:24px 26px; }
+  header small { opacity:.75; letter-spacing:.12em; text-transform:uppercase; font-size:11px }
+  header h1 { margin:6px 0 4px; font-size:24px }
+  header p { margin:0; opacity:.85; font-size:14px }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:16px 0 22px }
+  .kpi { background:#fff; border:1px solid var(--linea); border-radius:12px; padding:12px 14px }
+  .kpi b { display:block; font-size:24px } .kpi span { font-size:12px; color:var(--suave) }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--linea); border-radius:12px; overflow:hidden; font-size:13.5px }
+  th { text-align:left; background:#eef1f7; padding:10px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--suave) }
+  td { padding:10px 12px; border-top:1px solid var(--linea); vertical-align:top }
+  .est { font-weight:700; white-space:nowrap } .PASS{color:var(--pass)} .FAIL{color:var(--fail)} .ERROR{color:var(--error)} .SKIPPED{color:var(--skip)} .NOT_RUN{color:var(--nr)}
+  details { background:#fff; border:1px solid var(--linea); border-radius:12px; margin:10px 0; padding:10px 14px }
+  summary { cursor:pointer; font-weight:600 }
+  ol { margin:8px 0 0; padding-left:20px; font-size:13px } li { margin:4px 0 } li em { color:var(--suave); font-style:normal }
+  .grafica { border:1px solid var(--linea); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:12.5px }
+  h2 { font-size:17px; margin:28px 0 10px }
+  @media (max-width:640px){ td:nth-child(3), th:nth-child(3){ display:none } }
+</style>
+</head>
+<body><main>
+<header style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+  <div><svg width="120" height="120" viewBox="0 0 150 150"><circle cx="75" cy="75" r="54" fill="none" stroke="rgba(128,128,128,.25)" stroke-width="17"/><circle cx="75" cy="75" r="54" fill="none" stroke="#ff5a63" stroke-width="17" stroke-dasharray="339.29 0.00" stroke-dashoffset="-0.00" transform="rotate(-90 75 75)"/><text x="75" y="74" text-anchor="middle" font-size="27" font-weight="700" fill="#fff">0%</text><text x="75" y="92" text-anchor="middle" font-size="10" fill="#fff" opacity=".75">aprobados</text></svg></div><div style="flex:1;min-width:240px">
+  <small>Reporte de automatización · SIBIO-RFID</small>
+  <h1>Retesting de defectos — EJ-20261117-024954-ZJ</h1>
+  <p>Inicio 2026-11-17 02:49:54 · Fin 2026-11-17 02:49:58 · Duración 4.7 s · Estado de la ejecución: <b>finalizada</b></p>
+  <p style="margin-top:8px"><b>Veredicto: EN RIESGO: hay fallos funcionales que deben corregirse antes de liberar.</b></p></div>
+</header>
+<section class="kpis">
+  <div class="kpi"><b>5</b><span>Casos</span></div>
+  <div class="kpi"><b class="PASS">0</b><span>✔ PASS</span></div>
+  <div class="kpi"><b class="FAIL">5</b><span>✖ FAIL (funcional)</span></div>
+  <div class="kpi"><b class="ERROR">0</b><span>⚠ ERROR (infraestructura)</span></div>
+  <div class="kpi"><b class="SKIPPED">0</b><span>⤼ SKIPPED</span></div>
+  <div class="kpi"><b class="NOT_RUN">0</b><span>○ NOT RUN</span></div>
+  <div class="kpi"><b>0 %</b><span>Éxito (PASS / ejecutados)</span></div>
+</section>
+<section style="background:#fff;border:1px solid var(--linea);border-left:4px solid #6b5bff;border-radius:12px;padding:14px 18px;margin-bottom:18px">
+  <b>✦ Análisis de fallos con IA</b>
+  <p style="margin:8px 0 0;font-size:13.5px">TC-RT-01: El sistema permite el registro de CIs con caracteres especiales debido a una validación insuficiente en el campo de entrada. Es un FAIL funcional. Se debe revisar la expresión regular de validación en el endpoint de registro de reclusos.</p><p style="margin:8px 0 0;font-size:13.5px">TC-RT-02: Se aceptan fechas de nacimiento futuras por la falta de una restricción de límite superior en la lógica de negocio. Es un FAIL funcional. Se debe revisar la validación de fechas en el servicio de registro para asegurar que no excedan la fecha actual.</p><p style="margin:8px 0 0;font-size:13.5px">TC-RT-03: El sistema acepta identificadores RFID con longitud incorrecta al no validar el formato de bytes esperado. Es un FAIL funcional. Se debe revisar la validación de longitud y máscara de entrada para el campo UID.</p><p style="margin:8px 0 0;font-size:13.5px">TC-RT-04: El envío de datos no numéricos provoca un error interno del servidor en lugar de una respuesta de solicitud incorrecta controlada. Es un FAIL funcional. Se debe revisar el manejo de excepciones y la validación de tipos de datos en el controlador de telemetría.</p><p style="margin:8px 0 0;font-size:13.5px">TC-RT-05: No existe un límite superior para el porcentaje de batería, permitiendo valores que exceden el rango lógico del 100%. Es un FAIL funcional. Se debe revisar la restricción de rango numérico en el modelo de datos de telemetría.</p><p style="margin:8px 0 0;font-size:13.5px">La calidad de la versión es deficiente ya que el 100% de los defectos reportados previamente persisten sin corrección efectiva.</p>
+</section>
+<table>
+  <thead><tr><th>ID</th><th>Nombre del caso</th><th>Tipo / suite</th><th>Estado</th><th>Observación</th></tr></thead>
+  <tbody>
+  
+    <tr><td><b>TC-RT-01</b></td><td>Retest BUG-001: el CI del recluso no acepta letras ni símbolos</td>
+      <td>Funcional · retest</td>
+      <td class="est FAIL">✖ FAIL<br><small style="font-weight:400">Fallo funcional</small></td>
+      <td>Fallo funcional: BUG-001 sigue abierto: el CI &#39;ABC-$%&amp;&#39; se aceptó (HTTP 201)<br><small>Paso fallido: 1</small></td></tr>
+  
+    <tr><td><b>TC-RT-02</b></td><td>Retest BUG-002: estado y fecha de nacimiento fuera de dominio son rechazados</td>
+      <td>Funcional · retest</td>
+      <td class="est FAIL">✖ FAIL<br><small style="font-weight:400">Fallo funcional</small></td>
+      <td>Fallo funcional: BUG-002 sigue abierto en parte: la fecha futura se aceptó (HTTP 201)<br><small>Paso fallido: 2</small></td></tr>
+  
+    <tr><td><b>TC-RT-03</b></td><td>Retest BUG-003: UID RFID incompleto (3 bytes o dígitos impares) es rechazado</td>
+      <td>Funcional · retest</td>
+      <td class="est FAIL">✖ FAIL<br><small style="font-weight:400">Fallo funcional</small></td>
+      <td>Fallo funcional: BUG-003 sigue abierto: el UID &#39;3EDBA2&#39; se aceptó (HTTP 201)<br><small>Paso fallido: 1</small></td></tr>
+  
+    <tr><td><b>TC-RT-04</b></td><td>Retest BUG-004: pulso no numérico se rechaza con 400 y no con error 500</td>
+      <td>Funcional · retest</td>
+      <td class="est FAIL">✖ FAIL<br><small style="font-weight:400">Fallo funcional</small></td>
+      <td>Fallo funcional: BUG-004 sigue abierto: bpm=&#39;abc&#39; responde HTTP 500 en lugar de 400<br><small>Paso fallido: 3</small></td></tr>
+  
+    <tr><td><b>TC-RT-05</b></td><td>Retest BUG-005: batería mayor a 100 % es rechazada</td>
+      <td>Funcional · retest</td>
+      <td class="est FAIL">✖ FAIL<br><small style="font-weight:400">Fallo funcional</small></td>
+      <td>Fallo funcional: BUG-005 sigue abierto: bateria=250 se aceptó (HTTP 200)<br><small>Paso fallido: 1</small></td></tr>
+  
+  </tbody>
+</table>
+<h2>Conclusiones</h2>
+<ul style="background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 18px 14px 34px;font-size:13.5px;margin:0"><li>Se ejecutaron 5 de 5 casos y 0 aprobaron: 0 % de éxito sobre los casos ejecutados.</li><li>Fallos funcionales (el sistema no hizo lo esperado): TC-RT-01 en el paso 1; TC-RT-02 en el paso 2; TC-RT-03 en el paso 1; TC-RT-04 en el paso 3; TC-RT-05 en el paso 1. Requieren revisión del equipo de desarrollo.</li><li>El caso más lento fue TC-RT-04 con 0.51 s; la ejecución completa duró 4.7 s.</li></ul>
+<h2>Pasos ejecutados por caso</h2>
+
+<details open>
+  <summary><span class="FAIL">✖ FAIL</span> · TC-RT-01 — Retest BUG-001: el CI del recluso no acepta letras ni símbolos</summary>
+  <ol><li><span class="FAIL">✖</span> Registrar un recluso con CI &#39;ABC-$%&amp;&#39; <em>→ HTTP 201 | AssertionError: BUG-001 sigue abierto: el CI &#39;ABC-$%&amp;&#39; se aceptó (HTTP 201) (122 ms)</em></li></ol>
+  
+</details>
+
+<details open>
+  <summary><span class="FAIL">✖ FAIL</span> · TC-RT-02 — Retest BUG-002: estado y fecha de nacimiento fuera de dominio son rechazados</summary>
+  <ol><li><span class="PASS">✔</span> Registrar un recluso con estado &#39;volando&#39; <em>→ HTTP 400 Un registro nuevo empieza activo o en trámite (en_registro) (218 ms)</em></li><li><span class="FAIL">✖</span> Registrar un recluso con fecha de nacimiento 2090-01-01 <em>→ HTTP 201 | AssertionError: BUG-002 sigue abierto en parte: la fecha futura se aceptó (HTTP 201) (141 ms)</em></li></ol>
+  
+</details>
+
+<details open>
+  <summary><span class="FAIL">✖ FAIL</span> · TC-RT-03 — Retest BUG-003: UID RFID incompleto (3 bytes o dígitos impares) es rechazado</summary>
+  <ol><li><span class="FAIL">✖</span> Registrar una manilla con UID &#39;3EDBA2&#39; (6 dígitos) <em>→ HTTP 201 3E:DB:A2 | AssertionError: BUG-003 sigue abierto: el UID &#39;3EDBA2&#39; se aceptó (HTTP 201) (172 ms)</em></li></ol>
+  
+</details>
+
+<details open>
+  <summary><span class="FAIL">✖ FAIL</span> · TC-RT-04 — Retest BUG-004: pulso no numérico se rechaza con 400 y no con error 500</summary>
+  <ol><li><span class="PASS">✔</span> El lector envía telemetría con bpm=&#39;abc&#39; <em>→ HTTP 500 Error interno del servidor. Quedó registrado en logs/errores.log (222 ms)</em></li><li><span class="PASS">✔</span> El lector envía una lectura válida (bpm=72) justo después <em>→ HTTP 200 (137 ms)</em></li><li><span class="FAIL">✖</span> Comprobar que el dato inválido se rechazó con 400 (no 500) <em>→ bpm=&#39;abc&#39; respondió HTTP 500 | AssertionError: BUG-004 sigue abierto: bpm=&#39;abc&#39; responde HTTP 500 en lugar de 400 (0 ms)</em></li></ol>
+  
+</details>
+
+<details open>
+  <summary><span class="FAIL">✖ FAIL</span> · TC-RT-05 — Retest BUG-005: batería mayor a 100 % es rechazada</summary>
+  <ol><li><span class="FAIL">✖</span> El lector envía telemetría con bateria=250 <em>→ HTTP 200 | AssertionError: BUG-005 sigue abierto: bateria=250 se aceptó (HTTP 200) (111 ms)</em></li></ol>
+  
+</details>
+
+<p style="color:var(--suave);font-size:12px;margin-top:24px">Documento generado automáticamente por la plataforma de automatización TQA. Los estados se indican con texto e ícono, no solo con color.</p>
+</main></body></html>

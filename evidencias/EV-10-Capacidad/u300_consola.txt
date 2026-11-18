@@ -1,0 +1,621 @@
+﻿python : [2026-11-18 16:02:26,317] DESKTOP-EOVOAA9/INFO/locust.main: Starting Locust 2.47.0
+En línea: 2 Carácter: 64
++ ... -Sleep 20}; python -m locust -f complementos/locust/locustfile.py --h ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([2026-11-18 16:...g Locust 2.47.0:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-11-18 16:02:26,320] DESKTOP-EOVOAA9/INFO/locust.main: Run time limit set to 50 seconds
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                         0     0(0.00%) |      0    
+   0       0      0 |    0.00        0.00
+
+[2026-11-18 16:02:26,322] DESKTOP-EOVOAA9/INFO/locust.runners: Ramping to 300 users at a rate of 10.00 per second
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                   1     0(0.00%) |    159    
+ 159     159    159 |    0.00        0.00
+GET      GET /api/dashboard                                                                 4     0(0.00%) |    170    
+ 152     186    180 |    0.00        0.00
+GET      GET /api/reclusos?q=                                                               6     0(0.00%) |    168    
+  96     250    150 |    0.00        0.00
+POST     POST /api/auth/login                                                              19     0(0.00%) |    960    
+ 821    1139    940 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                        30     0(0.00%) |    669    
+  96    1139    880 |    0.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  12     0(0.00%) |    157    
+ 109     229    160 |    0.50        0.00
+GET      GET /api/dashboard                                                                21     0(0.00%) |    190    
+ 140     278    190 |    2.00        0.00
+GET      GET /api/reclusos?q=                                                               9     0(0.00%) |    171    
+  96     250    150 |    2.50        0.00
+POST     POST /api/auth/login                                                              34     0(0.00%) |    962    
+ 821    1139    960 |    5.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                        76     0(0.00%) |    528    
+  96    1139    250 |   10.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  24     0(0.00%) |    178    
+ 101     357    170 |    2.50        0.00
+GET      GET /api/dashboard                                                                35     0(0.00%) |    221    
+ 140     384    190 |    5.00        0.00
+GET      GET /api/reclusos?q=                                                              28     0(0.00%) |    190    
+  96     332    170 |    2.00        0.00
+POST     POST /api/auth/login                                                              50     0(0.00%) |   1023    
+ 821    1395   1000 |    7.50        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       137     0(0.00%) |    500    
+  96    1395    250 |   17.00        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  36     0(0.00%) |    189    
+ 101     357    180 |    3.33        0.00
+GET      GET /api/dashboard                                                                55     0(0.00%) |    245    
+ 140     612    210 |    5.50        0.00
+GET      GET /api/reclusos?q=                                                              45     0(0.00%) |    209    
+  96     440    200 |    4.17        0.00
+POST     POST /api/auth/login                                                              65     0(0.00%) |   1164    
+ 821    1977   1100 |    8.33        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       201     0(0.00%) |    524    
+  96    1977    250 |   21.33        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  49     0(0.00%) |    303    
+ 101     847    210 |    4.50        0.00
+GET      GET /api/dashboard                                                                86     0(0.00%) |    361    
+ 140     801    300 |    6.38        0.00
+GET      GET /api/reclusos?q=                                                              60     0(0.00%) |    302    
+  96     859    240 |    5.38        0.00
+POST     POST /api/auth/login                                                              80     0(0.00%) |   1390    
+ 821    2734   1100 |    7.50        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       275     0(0.00%) |    637    
+  96    2734    420 |   23.75        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  65     0(0.00%) |    338    
+  98     917    220 |    4.80        0.00
+GET      GET /api/dashboard                                                               136     0(0.00%) |    389    
+ 131    1022    340 |    8.10        0.00
+GET      GET /api/reclusos?q=                                                              89     0(0.00%) |    335    
+  96     937    250 |    5.70        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    7.80        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       386     0(0.00%) |    668    
+  96    2980    430 |   26.40        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  76     0(0.00%) |    311    
+  98     917    210 |    6.20        0.00
+GET      GET /api/dashboard                                                               167     0(0.00%) |    357    
+ 131    1022    280 |   12.20        0.00
+GET      GET /api/reclusos?q=                                                             123     0(0.00%) |    289    
+  96     937    210 |    7.90        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    8.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       462     0(0.00%) |    588    
+  96    2980    320 |   34.90        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                  96     0(0.00%) |    282    
+  89     917    210 |    6.60        0.00
+GET      GET /api/dashboard                                                               219     0(0.00%) |    320    
+ 119    1022    240 |   14.10        0.00
+GET      GET /api/reclusos?q=                                                             150     0(0.00%) |    267    
+  90     937    200 |   11.20        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    6.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       561     0(0.00%) |    517    
+  89    2980    250 |   38.50        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 104     0(0.00%) |    269    
+  82     917    190 |    7.00        0.00
+GET      GET /api/dashboard                                                               264     0(0.00%) |    291    
+ 109    1022    210 |   17.30        0.00
+GET      GET /api/reclusos?q=                                                             177     0(0.00%) |    243    
+  81     937    180 |   12.20        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    4.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       641     0(0.00%) |    469    
+  81    2980    230 |   41.10        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 123     0(0.00%) |    246    
+  82     917    180 |    6.50        0.00
+GET      GET /api/dashboard                                                               307     0(0.00%) |    274    
+ 109    1022    200 |   20.30        0.00
+GET      GET /api/reclusos?q=                                                             204     0(0.00%) |    228    
+  81     937    160 |   12.90        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    3.60        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       730     0(0.00%) |    430    
+  81    2980    210 |   43.30        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 139     0(0.00%) |    235    
+  82     917    160 |    7.20        0.00
+GET      GET /api/dashboard                                                               354     0(0.00%) |    265    
+ 109    1022    200 |   21.60        0.00
+GET      GET /api/reclusos?q=                                                             232     0(0.00%) |    218    
+  76     937    150 |   14.30        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    1.80        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       821     0(0.00%) |    402    
+  76    2980    200 |   44.90        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 156     0(0.00%) |    224    
+  82     917    150 |    7.50        0.00
+GET      GET /api/dashboard                                                               405     0(0.00%) |    251    
+ 109    1022    180 |   21.60        0.00
+GET      GET /api/reclusos?q=                                                             260     0(0.00%) |    208    
+  76     937    140 |   14.00        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       917     0(0.00%) |    375    
+  76    2980    190 |   43.10        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 166     0(0.00%) |    219    
+  82     917    150 |    7.90        0.00
+GET      GET /api/dashboard                                                               447     0(0.00%) |    244    
+ 109    1022    180 |   23.10        0.00
+GET      GET /api/reclusos?q=                                                             290     0(0.00%) |    201    
+  76     937    140 |   13.30        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                       999     0(0.00%) |    357    
+  76    2980    180 |   44.30        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 189     0(0.00%) |    217    
+  82     917    160 |    7.50        0.00
+GET      GET /api/dashboard                                                               491     0(0.00%) |    244    
+ 109    1022    180 |   23.40        0.00
+GET      GET /api/reclusos?q=                                                             310     0(0.00%) |    200    
+  76     937    140 |   13.70        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1086     0(0.00%) |    346    
+  76    2980    180 |   44.60        0.00
+
+[2026-11-18 16:02:55,400] DESKTOP-EOVOAA9/INFO/locust.runners: All users spawned: {"OperadorDeTurno": 300} (300 total 
+users)
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 208     0(0.00%) |    209    
+  82     917    140 |    8.50        0.00
+GET      GET /api/dashboard                                                               534     0(0.00%) |    239    
+ 109    1022    180 |   23.20        0.00
+GET      GET /api/reclusos?q=                                                             344     0(0.00%) |    193    
+  76     937    140 |   13.40        0.00
+POST     POST /api/auth/login                                                              96     0(0.00%) |   1593    
+ 821    2980   1300 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1182     0(0.00%) |    330    
+  76    2980    170 |   45.10        0.00
+
+[2026-11-18 16:02:57,470] DESKTOP-EOVOAA9/ERROR/locust.user.users: El usuario de pruebas no pudo iniciar sesión (HTTP 
+0)
+Traceback (most recent call last):
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 206, 
+in run_user
+    user.run()
+    ~~~~~~~~^^
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+2026-11-18T20:02:57Z <Greenlet at 0x1bf90f55940: run_user(<locustfile.OperadorDeTurno object at 0x000001BF90)> failed 
+with RuntimeError
+
+[2026-11-18 16:02:57,474] DESKTOP-EOVOAA9/ERROR/locust.user.users: El usuario de pruebas no pudo iniciar sesión (HTTP 
+0)
+Traceback (most recent call last):
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 206, 
+in run_user
+    user.run()
+    ~~~~~~~~^^
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+2026-11-18T20:02:57Z <Greenlet at 0x1bf90f55bc0: run_user(<locustfile.OperadorDeTurno object at 0x000001BF90)> failed 
+with RuntimeError
+
+[2026-11-18 16:02:57,479] DESKTOP-EOVOAA9/ERROR/locust.user.users: El usuario de pruebas no pudo iniciar sesión (HTTP 
+0)
+Traceback (most recent call last):
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 206, 
+in run_user
+    user.run()
+    ~~~~~~~~^^
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+2026-11-18T20:02:57Z <Greenlet at 0x1bf90f55d00: run_user(<locustfile.OperadorDeTurno object at 0x000001BF90)> failed 
+with RuntimeError
+
+[2026-11-18 16:02:57,485] DESKTOP-EOVOAA9/ERROR/locust.user.users: El usuario de pruebas no pudo iniciar sesión (HTTP 
+0)
+Traceback (most recent call last):
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 206, 
+in run_user
+    user.run()
+    ~~~~~~~~^^
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\user\users.py", line 166, 
+in run
+    self.on_start()
+    ~~~~~~~~~~~~~^^
+  File 
+"C:\Users\ALEXANDER\Documents\sistema-biometrico\Proyecto-Automatizacion-TQA\complementos\locust\locustfile.py", line 
+38, in on_start
+    raise RuntimeError(f"El usuario de pruebas no pudo iniciar sesión (HTTP {r.status_code})")
+RuntimeError: El usuario de pruebas no pudo iniciar sesión (HTTP 0)
+2026-11-18T20:02:57Z <Greenlet at 0x1bf90f55a80: run_user(<locustfile.OperadorDeTurno object at 0x000001BF90)> failed 
+with RuntimeError
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 231     0(0.00%) |    201    
+  82     917    140 |    8.40        0.00
+GET      GET /api/dashboard                                                               575     0(0.00%) |    234    
+ 109    1022    180 |   22.90        0.00
+GET      GET /api/reclusos?q=                                                             375     0(0.00%) |    189    
+  76     937    140 |   14.10        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1281     4(0.31%) |    323    
+  76    2980    170 |   45.40        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 247     0(0.00%) |    196    
+  82     917    140 |    8.60        0.00
+GET      GET /api/dashboard                                                               618     0(0.00%) |    230    
+ 109    1022    170 |   22.50        0.00
+GET      GET /api/reclusos?q=                                                             405     0(0.00%) |    185    
+  76     937    140 |   14.30        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.40        0.40
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1370     4(0.29%) |    311    
+  76    2980    170 |   45.80        0.40
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 271     0(0.00%) |    190    
+  80     917    130 |    8.90        0.00
+GET      GET /api/dashboard                                                               662     0(0.00%) |    225    
+ 107    1022    170 |   21.10        0.00
+GET      GET /api/reclusos?q=                                                             427     0(0.00%) |    182    
+  76     937    140 |   14.80        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.40        0.40
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1460     4(0.27%) |    301    
+  76    2980    160 |   45.20        0.40
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 288     0(0.00%) |    185    
+  80     917    130 |   10.10        0.00
+GET      GET /api/dashboard                                                               713     0(0.00%) |    220    
+ 107    1022    170 |   21.10        0.00
+GET      GET /api/reclusos?q=                                                             453     0(0.00%) |    178    
+  76     937    130 |   13.80        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.40        0.40
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1554     4(0.26%) |    291    
+  76    2980    160 |   45.40        0.40
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 306     0(0.00%) |    182    
+  80     917    130 |    9.90        0.00
+GET      GET /api/dashboard                                                               757     0(0.00%) |    217    
+ 107    1022    170 |   21.60        0.00
+GET      GET /api/reclusos?q=                                                             478     0(0.00%) |    175    
+  75     937    130 |   13.80        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.40        0.40
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1641     4(0.24%) |    283    
+  75    2980    160 |   45.70        0.40
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 327     0(0.00%) |    180    
+  80     917    130 |    9.80        0.00
+GET      GET /api/dashboard                                                               799     0(0.00%) |    214    
+ 107    1022    170 |   22.20        0.00
+GET      GET /api/reclusos?q=                                                             500     0(0.00%) |    173    
+  75     937    130 |   13.10        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.40        0.40
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1726     4(0.23%) |    277    
+  75    2980    160 |   45.50        0.40
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 344     0(0.00%) |    178    
+  80     917    130 |   10.00        0.00
+GET      GET /api/dashboard                                                               844     0(0.00%) |    212    
+ 107    1022    170 |   21.90        0.00
+GET      GET /api/reclusos?q=                                                             527     0(0.00%) |    172    
+  75     937    130 |   12.90        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1815     4(0.22%) |    271    
+  75    2980    160 |   44.80        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 359     0(0.00%) |    175    
+  80     917    130 |    9.70        0.00
+GET      GET /api/dashboard                                                               903     0(0.00%) |    209    
+ 107    1022    160 |   23.00        0.00
+GET      GET /api/reclusos?q=                                                             547     0(0.00%) |    170    
+  75     937    130 |   11.70        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1909     4(0.21%) |    265    
+  75    2980    150 |   44.40        0.00
+
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 381     0(0.00%) |    172    
+  80     917    130 |    8.70        0.00
+GET      GET /api/dashboard                                                               940     0(0.00%) |    207    
+ 107    1022    160 |   24.30        0.00
+GET      GET /api/reclusos?q=                                                             572     0(0.00%) |    168    
+  75     937    130 |   12.00        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    0.00        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      1993     4(0.20%) |    260    
+  75    2980    150 |   45.00        0.00
+
+[2026-11-18 16:03:15,002] DESKTOP-EOVOAA9/INFO/locust.main: --run-time limit reached, shutting down
+[2026-11-18 16:03:15,637] DESKTOP-EOVOAA9/INFO/locust.main: Shutting down (exit code 1)
+Type     Name                                                                          # reqs      # fails |    Avg    
+ Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+GET      GET /api/alertas                                                                 387     0(0.00%) |    173    
+  80     917    130 |    7.88        0.00
+GET      GET /api/dashboard                                                               961     0(0.00%) |    208    
+ 107    1022    160 |   19.56        0.00
+GET      GET /api/reclusos?q=                                                             580     0(0.00%) |    168    
+  75     937    130 |   11.81        0.00
+POST     POST /api/auth/login                                                             100     4(4.00%) |   1612    
+ 821    2980   1400 |    2.04        0.08
+--------|----------------------------------------------------------------------------|-------|-------------|-------|---
+----|-------|-------|--------|-----------
+         Aggregated                                                                      2028     4(0.20%) |    259    
+  75    2980    150 |   41.29        0.08
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    
+80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------
+|------|------|------|------|------|------|------|------
+GET      GET /api/alertas                                                                      130    150    190    
+210    280    470    660    830    920    920    920    387
+GET      GET /api/dashboard                                                                    160    190    220    
+250    300    470    680    780   1000   1000   1000    961
+GET      GET /api/reclusos?q=                                                                  130    150    190    
+200    250    410    660    700    940    940    940    580
+POST     POST /api/auth/login                                                                 1400   2000   2300   
+2400   2600   2700   2900   3000   3000   3000   3000    100
+--------|--------------------------------------------------------------------------------|--------|------|------|------
+|------|------|------|------|------|------|------|------
+         Aggregated                                                                            150    190    220    
+250    440    850   1700   2400   2900   3000   3000   2028
+
+Error report
+# occurrences      Error                                                                                               
+------------------|----------------------------------------------------------------------------------------------------
+-----------------------------------------
+4                  POST POST /api/auth/login: ConnectionRefusedError(10061, '[WinError 10061] No se puede establecer 
+una conexión ya que el equipo de destino denegó expresamente dicha conexión.')
+------------------|----------------------------------------------------------------------------------------------------
+-----------------------------------------
+
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\stats.py", line 1170, in 
+stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: I/O operation on closed file.
+2026-11-18T20:03:15Z <Greenlet at 0x1bf8e6720c0: <bound method StatsCSVFileWriter.stats_writer of 
+<locust.stats.StatsCSVFileWriter object at 0x000001BF8E625BE0>>> failed with ValueError
+
+[2026-11-18 16:03:15,643] DESKTOP-EOVOAA9/CRITICAL/locust.main: Unhandled exception in greenlet: <Greenlet at 
+0x1bf8e6720c0: <bound method StatsCSVFileWriter.stats_writer of <locust.stats.StatsCSVFileWriter object at 
+0x000001BF8E625BE0>>>
+Traceback (most recent call last):
+  File "src/gevent/greenlet.py", line 912, in gevent._gevent_cgreenlet.Greenlet.run
+  File "C:\Users\ALEXANDER\AppData\Local\Programs\Python\Python313\Lib\site-packages\locust\stats.py", line 1170, in 
+stats_writer
+    self.requests_csv_filehandle.seek(requests_csv_data_start)
+    ^^^^^^^
+ValueError: I/O operation on closed file.
+
+[QA] peticiones=2028 errores=4 p50=150 ms p95=850 ms pet/s=41.3 (umbral p95 800 ms)
+[QA] Resultado: FAIL

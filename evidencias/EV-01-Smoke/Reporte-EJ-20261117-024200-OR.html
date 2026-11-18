@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte EJ-20261117-024200-OR – Smoke</title>
+<style>
+  :root { --tinta:#152033; --suave:#5b6578; --linea:#e2e6ee; --fondo:#f5f7fb; --pass:#0a7d48; --fail:#c0262d; --error:#a65a00; --skip:#5a5fc7; --nr:#6b7280; }
+  * { box-sizing:border-box }
+  body { margin:0; font-family:"Segoe UI",system-ui,Arial,sans-serif; color:var(--tinta); background:var(--fondo); }
+  main { max-width:1100px; margin:0 auto; padding:28px 18px 48px; }
+  header { background:linear-gradient(120deg,#0d1b33,#1b3a6b 60%,#0f5c63); color:#fff; border-radius:16px; padding:24px 26px; }
+  header small { opacity:.75; letter-spacing:.12em; text-transform:uppercase; font-size:11px }
+  header h1 { margin:6px 0 4px; font-size:24px }
+  header p { margin:0; opacity:.85; font-size:14px }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:10px; margin:16px 0 22px }
+  .kpi { background:#fff; border:1px solid var(--linea); border-radius:12px; padding:12px 14px }
+  .kpi b { display:block; font-size:24px } .kpi span { font-size:12px; color:var(--suave) }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--linea); border-radius:12px; overflow:hidden; font-size:13.5px }
+  th { text-align:left; background:#eef1f7; padding:10px 12px; font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--suave) }
+  td { padding:10px 12px; border-top:1px solid var(--linea); vertical-align:top }
+  .est { font-weight:700; white-space:nowrap } .PASS{color:var(--pass)} .FAIL{color:var(--fail)} .ERROR{color:var(--error)} .SKIPPED{color:var(--skip)} .NOT_RUN{color:var(--nr)}
+  details { background:#fff; border:1px solid var(--linea); border-radius:12px; margin:10px 0; padding:10px 14px }
+  summary { cursor:pointer; font-weight:600 }
+  ol { margin:8px 0 0; padding-left:20px; font-size:13px } li { margin:4px 0 } li em { color:var(--suave); font-style:normal }
+  .grafica { border:1px solid var(--linea); border-radius:10px; padding:10px 12px; margin:8px 0; font-size:12.5px }
+  h2 { font-size:17px; margin:28px 0 10px }
+  @media (max-width:640px){ td:nth-child(3), th:nth-child(3){ display:none } }
+</style>
+</head>
+<body><main>
+<header style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+  <div><svg width="120" height="120" viewBox="0 0 150 150"><circle cx="75" cy="75" r="54" fill="none" stroke="rgba(128,128,128,.25)" stroke-width="17"/><circle cx="75" cy="75" r="54" fill="none" stroke="#2fd08a" stroke-width="17" stroke-dasharray="339.29 0.00" stroke-dashoffset="-0.00" transform="rotate(-90 75 75)"/><text x="75" y="74" text-anchor="middle" font-size="27" font-weight="700" fill="#fff">100%</text><text x="75" y="92" text-anchor="middle" font-size="10" fill="#fff" opacity=".75">aprobados</text></svg></div><div style="flex:1;min-width:240px">
+  <small>Reporte de automatización · SIBIO-RFID</small>
+  <h1>Smoke — EJ-20261117-024200-OR</h1>
+  <p>Inicio 2026-11-17 02:42:00 · Fin 2026-11-17 02:42:36 · Duración 35.6 s · Estado de la ejecución: <b>finalizada</b></p>
+  <p style="margin-top:8px"><b>Veredicto: APTA: la versión probada cumple los casos ejecutados.</b></p></div>
+</header>
+<section class="kpis">
+  <div class="kpi"><b>5</b><span>Casos</span></div>
+  <div class="kpi"><b class="PASS">5</b><span>✔ PASS</span></div>
+  <div class="kpi"><b class="FAIL">0</b><span>✖ FAIL (funcional)</span></div>
+  <div class="kpi"><b class="ERROR">0</b><span>⚠ ERROR (infraestructura)</span></div>
+  <div class="kpi"><b class="SKIPPED">0</b><span>⤼ SKIPPED</span></div>
+  <div class="kpi"><b class="NOT_RUN">0</b><span>○ NOT RUN</span></div>
+  <div class="kpi"><b>100 %</b><span>Éxito (PASS / ejecutados)</span></div>
+</section>
+
+<table>
+  <thead><tr><th>ID</th><th>Nombre del caso</th><th>Tipo / suite</th><th>Estado</th><th>Observación</th></tr></thead>
+  <tbody>
+  
+    <tr><td><b>TC-API-01</b></td><td>Inicio de sesión con credenciales válidas</td>
+      <td>Funcional · smoke, sanity, regression</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>4 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-API-03</b></td><td>Rutas protegidas rechazan peticiones sin sesión o con token alterado</td>
+      <td>Funcional · smoke, regression</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>2 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-API-07</b></td><td>Lectura RFID simulada en zona restringida genera alerta crítica</td>
+      <td>Funcional · integration, regression, smoke</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>3 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-API-09</b></td><td>Centro de monitoreo entrega los indicadores (KPI)</td>
+      <td>Funcional · smoke, sanity, regression</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>2 pasos verificados</td></tr>
+  
+    <tr><td><b>TC-E2E-01</b></td><td>Inicio de sesión en el panel y Centro de monitoreo visible</td>
+      <td>Funcional · smoke, e2e, regression</td>
+      <td class="est PASS">✔ PASS<br><small style="font-weight:400">Aprobado</small></td>
+      <td>5 pasos verificados</td></tr>
+  
+  </tbody>
+</table>
+<h2>Conclusiones</h2>
+<ul style="background:#fff;border:1px solid var(--linea);border-radius:12px;padding:14px 18px 14px 34px;font-size:13.5px;margin:0"><li>Se ejecutaron 5 de 5 casos y 5 aprobaron: 100 % de éxito sobre los casos ejecutados.</li><li>No se encontró ningún fallo funcional en los casos ejecutados.</li><li>El caso más lento fue TC-E2E-01 con 24.14 s; la ejecución completa duró 35.6 s.</li></ul>
+<h2>Pasos ejecutados por caso</h2>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-API-01 — Inicio de sesión con credenciales válidas</summary>
+  <ol><li><span class="PASS">✔</span> Enviar usuario y contraseña del administrador (POST /api/auth/login) <em>→ HTTP 200; pide código 2FA (349 ms)</em></li><li><span class="PASS">✔</span> Enviar el código de 6 dígitos del autenticador (POST /api/auth/2fa/verificar) <em>→ HTTP 200; código aceptado (326 ms)</em></li><li><span class="PASS">✔</span> Comprobar el token y el rol recibidos <em>→ token de 276 caracteres; rol=administrador (0 ms)</em></li><li><span class="PASS">✔</span> Consultar GET /api/auth/yo con el token recibido <em>→ HTTP 200; usuario=qa_admin (113 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-API-03 — Rutas protegidas rechazan peticiones sin sesión o con token alterado</summary>
+  <ol><li><span class="PASS">✔</span> GET /api/reclusos sin cabecera Authorization <em>→ HTTP 401: Token no enviado (5 ms)</em></li><li><span class="PASS">✔</span> GET /api/reclusos con un token alterado <em>→ HTTP 401: Token inválido (5 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-API-07 — Lectura RFID simulada en zona restringida genera alerta crítica</summary>
+  <ol><li><span class="PASS">✔</span> Crear un lector simulado en la zona restringida (POST /api/puntos-control) <em>→ HTTP 201; punto id=25 (182 ms)</em></li><li><span class="PASS">✔</span> El lector envía la lectura de la manilla A3:5F:12:9C <em>→ HTTP 200; reconocido=True; zona=Muro perimetral norte (245 ms)</em></li><li><span class="PASS">✔</span> Buscar la alerta crítica de zona restringida en GET /api/alertas <em>→ HTTP 200; 3 alerta(s) crítica(s) de zona restringida (226 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-API-09 — Centro de monitoreo entrega los indicadores (KPI)</summary>
+  <ol><li><span class="PASS">✔</span> Consultar GET /api/dashboard <em>→ HTTP 200 en 228 ms; KPI: {&#39;alertas_criticas&#39;: 20, &#39;alertas_pendientes&#39;: 31, &#39;con_perfil&#39;: 3, &#39;eventos&#39;: 127, &#39;eventos_fallidos&#39;: 31, &#39;manillas_asignadas&#39;: 11, &#39;manillas_en_linea&#39;: 1, &#39;reclusos&#39;: 16} (228 ms)</em></li><li><span class="PASS">✔</span> Comprobar que los KPI son números no negativos <em>→ todos válidos (0 ms)</em></li></ol>
+  
+</details>
+
+<details >
+  <summary><span class="PASS">✔ PASS</span> · TC-E2E-01 — Inicio de sesión en el panel y Centro de monitoreo visible</summary>
+  <ol><li><span class="PASS">✔</span> Abrir el panel y escribir usuario y contraseña (administrador: qa_admin) <em>→ Formulario enviado (2826 ms)</em></li><li><span class="PASS">✔</span> Escribir el código de 6 dígitos del autenticador (2FA) <em>→ Código escrito; el panel lo verifica solo al completar los 6 dígitos (17895 ms)</em></li><li><span class="PASS">✔</span> Verificar que se entró al sistema (menú lateral visible) <em>→ Sesión iniciada; menú lateral visible (2196 ms)</em></li><li><span class="PASS">✔</span> Verificar el título &#39;Centro de monitoreo&#39; <em>→ Título visible (11 ms)</em></li><li><span class="PASS">✔</span> Verificar el indicador &#39;Reclusos activos&#39; <em>→ KPI visible (11 ms)</em></li></ol>
+  
+</details>
+
+<p style="color:var(--suave);font-size:12px;margin-top:24px">Documento generado automáticamente por la plataforma de automatización TQA. Los estados se indican con texto e ícono, no solo con color.</p>
+</main></body></html>

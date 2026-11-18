@@ -1,0 +1,674 @@
+{
+ "id": "EJ-20261117-024248-DW",
+ "tipo": "funcional",
+ "suite": "regression",
+ "etiqueta": "Regresión",
+ "correo": "[correo oculto]",
+ "estado": "finalizada",
+ "creada": "2026-11-17 02:42:48",
+ "inicio": "2026-11-17 02:42:48",
+ "fin": "2026-11-17 02:44:09",
+ "duracion_s": 80.6,
+ "actual": null,
+ "casos": [
+  {
+   "id": "TC-API-01",
+   "nombre": "Inicio de sesión con credenciales válidas",
+   "suites": [
+    "smoke",
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Autenticación",
+   "objetivo": "Comprobar que un usuario válido obtiene una sesión (token) y su rol.",
+   "precondiciones": "SIBIO-RFID encendido con datos de demostración.",
+   "datos": "Usuario: qa_admin / contraseña de demostración",
+   "resultado_esperado": "HTTP 200 (con código 2FA si el administrador lo tiene), token y rol 'administrador'; /auth/yo devuelve el mismo usuario.",
+   "estado": "PASS",
+   "observacion": "4 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Enviar usuario y contraseña del administrador (POST /api/auth/login)",
+     "observado": "HTTP 200; pide código 2FA",
+     "estado": "PASS",
+     "ms": 369,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Enviar el código de 6 dígitos del autenticador (POST /api/auth/2fa/verificar)",
+     "observado": "HTTP 200; código aceptado",
+     "estado": "PASS",
+     "ms": 8720,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Comprobar el token y el rol recibidos",
+     "observado": "token de 276 caracteres; rol=administrador",
+     "estado": "PASS",
+     "ms": 0,
+     "captura": null
+    },
+    {
+     "n": 4,
+     "accion": "Consultar GET /api/auth/yo con el token recibido",
+     "observado": "HTTP 200; usuario=qa_admin",
+     "estado": "PASS",
+     "ms": 43,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 9.14,
+   "fin": "2026-11-17 02:43:00"
+  },
+  {
+   "id": "TC-API-02",
+   "nombre": "Contraseña incorrecta y usuario inexistente dan el mismo mensaje",
+   "suites": [
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Autenticación",
+   "objetivo": "Verificar que el sistema no revela si un usuario existe (mensaje genérico).",
+   "precondiciones": "SIBIO-RFID encendido.",
+   "datos": "admin + clave errónea; usuario aleatorio inexistente",
+   "resultado_esperado": "HTTP 401 y el mismo mensaje 'Usuario o contraseña incorrectos' en ambos casos.",
+   "estado": "PASS",
+   "observacion": "3 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Iniciar sesión con contraseña incorrecta",
+     "observado": "HTTP 401: Usuario o contraseña incorrectos",
+     "estado": "PASS",
+     "ms": 273,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Iniciar sesión con un usuario que no existe",
+     "observado": "HTTP 401: Usuario o contraseña incorrectos",
+     "estado": "PASS",
+     "ms": 84,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Comparar ambos mensajes",
+     "observado": "mensajes iguales",
+     "estado": "PASS",
+     "ms": 1,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.8,
+   "fin": "2026-11-17 02:43:01"
+  },
+  {
+   "id": "TC-API-03",
+   "nombre": "Rutas protegidas rechazan peticiones sin sesión o con token alterado",
+   "suites": [
+    "smoke",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Seguridad",
+   "objetivo": "Comprobar que la API no entrega datos sin un token válido.",
+   "precondiciones": "SIBIO-RFID encendido.",
+   "datos": "Sin cabecera Authorization; token falso",
+   "resultado_esperado": "HTTP 401 en ambos casos.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "GET /api/reclusos sin cabecera Authorization",
+     "observado": "HTTP 401: Token no enviado",
+     "estado": "PASS",
+     "ms": 5,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "GET /api/reclusos con un token alterado",
+     "observado": "HTTP 401: Token inválido",
+     "estado": "PASS",
+     "ms": 5,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.02,
+   "fin": "2026-11-17 02:43:01"
+  },
+  {
+   "id": "TC-API-04",
+   "nombre": "Permisos por rol: operador y supervisor no acceden a la gestión",
+   "suites": [
+    "regression",
+    "sanity"
+   ],
+   "tipo": "funcional",
+   "modulo": "Usuarios y roles",
+   "objetivo": "Verificar el control de acceso basado en roles (RBAC).",
+   "precondiciones": "Usuarios de demostración operador y supervisor activos.",
+   "datos": "Operador: qa_operador; Supervisor: qa_supervisor",
+   "resultado_esperado": "HTTP 403 para operador en /usuarios y supervisor en /auditoria; 200 para el administrador.",
+   "estado": "PASS",
+   "observacion": "3 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Operador intenta listar usuarios (GET /api/usuarios)",
+     "observado": "HTTP 403",
+     "estado": "PASS",
+     "ms": 106,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Supervisor intenta abrir la auditoría (GET /api/auditoria)",
+     "observado": "HTTP 403",
+     "estado": "PASS",
+     "ms": 199,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Administrador lista usuarios y no se expone ningún hash de contraseña",
+     "observado": "HTTP 200; 8 usuarios; password_hash expuesto: False",
+     "estado": "PASS",
+     "ms": 119,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 1.22,
+   "fin": "2026-11-17 02:43:02"
+  },
+  {
+   "id": "TC-API-05",
+   "nombre": "Registrar un recluso y encontrarlo en la búsqueda",
+   "suites": [
+    "regression",
+    "integration"
+   ],
+   "tipo": "funcional",
+   "modulo": "Reclusos",
+   "objetivo": "Comprobar el alta de un recluso y que la búsqueda lo encuentra por nombre.",
+   "precondiciones": "Sesión de administrador; penal San Pedro (id 1).",
+   "datos": "Código QA-xxxx, nombres 'Prueba Automatizada', apellidos 'Qa Sibio'",
+   "resultado_esperado": "HTTP 201 al registrar; la búsqueda devuelve el código registrado.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "POST /api/reclusos con código QA-02430253",
+     "observado": "HTTP 201; id=19 ",
+     "estado": "PASS",
+     "ms": 127,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Buscar 'QA-02430253' en GET /api/reclusos?q=",
+     "observado": "HTTP 200; resultados: ['QA-02430253']",
+     "estado": "PASS",
+     "ms": 217,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.36,
+   "fin": "2026-11-17 02:43:03"
+  },
+  {
+   "id": "TC-API-06",
+   "nombre": "Código interno duplicado y campos obligatorios vacíos son rechazados",
+   "suites": [
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Reclusos",
+   "objetivo": "Validar las reglas de negocio al registrar reclusos.",
+   "precondiciones": "Existe el recluso SP-0412 (datos de demostración).",
+   "datos": "codigo_interno=SP-0412; registro sin nombres",
+   "resultado_esperado": "HTTP 409 por duplicado y HTTP 400 por campo vacío.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Registrar un recluso con el código ya existente SP-0412",
+     "observado": "HTTP 409: Ya existe un recluso con ese código interno",
+     "estado": "PASS",
+     "ms": 97,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Registrar un recluso sin nombres",
+     "observado": "HTTP 400: Faltan campos: nombres",
+     "estado": "PASS",
+     "ms": 80,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.19,
+   "fin": "2026-11-17 02:43:03"
+  },
+  {
+   "id": "TC-API-07",
+   "nombre": "Lectura RFID simulada en zona restringida genera alerta crítica",
+   "suites": [
+    "integration",
+    "regression",
+    "smoke"
+   ],
+   "tipo": "funcional",
+   "modulo": "Manillas RFID y Alertas",
+   "objetivo": "Comprobar la integración lector RFID → evento → alerta (sin hardware, lector simulado por API).",
+   "precondiciones": "Zona 'Muro perimetral norte' (restringida, id 7); manilla A3:5F:12:9C asignada a SP-0412.",
+   "datos": "Lector QA creado por la prueba; codigo_rfid=A3:5F:12:9C",
+   "resultado_esperado": "La lectura reconoce al recluso y aparece una alerta crítica de zona restringida.",
+   "estado": "PASS",
+   "observacion": "3 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Crear un lector simulado en la zona restringida (POST /api/puntos-control)",
+     "observado": "HTTP 201; punto id=26",
+     "estado": "PASS",
+     "ms": 105,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "El lector envía la lectura de la manilla A3:5F:12:9C",
+     "observado": "HTTP 200; reconocido=True; zona=Muro perimetral norte",
+     "estado": "PASS",
+     "ms": 120,
+     "captura": null
+    },
+    {
+     "n": 3,
+     "accion": "Buscar la alerta crítica de zona restringida en GET /api/alertas",
+     "observado": "HTTP 200; 3 alerta(s) crítica(s) de zona restringida",
+     "estado": "PASS",
+     "ms": 101,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.34,
+   "fin": "2026-11-17 02:43:03"
+  },
+  {
+   "id": "TC-API-08",
+   "nombre": "Manilla desconocida es rechazada y queda como posible suplantación",
+   "suites": [
+    "integration",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Manillas RFID",
+   "objetivo": "Verificar que una manilla no registrada no se acepta.",
+   "precondiciones": "Existe al menos un lector; FF:FF:FF:FF no está registrada.",
+   "datos": "codigo_rfid=FF:FF:FF:FF",
+   "resultado_esperado": "HTTP 404 'Manilla no válida' y alerta de posible suplantación.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "El lector envía la manilla desconocida FF:FF:FF:FF",
+     "observado": "HTTP 404: Manilla no válida",
+     "estado": "PASS",
+     "ms": 172,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Comprobar la alerta de posible suplantación",
+     "observado": "5 alerta(s) que mencionan FF:FF:FF:FF",
+     "estado": "PASS",
+     "ms": 119,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.45,
+   "fin": "2026-11-17 02:43:04"
+  },
+  {
+   "id": "TC-API-09",
+   "nombre": "Centro de monitoreo entrega los indicadores (KPI)",
+   "suites": [
+    "smoke",
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Centro de monitoreo",
+   "objetivo": "Comprobar que el tablero devuelve los KPI principales.",
+   "precondiciones": "Sesión de administrador.",
+   "datos": "GET /api/dashboard",
+   "resultado_esperado": "HTTP 200 con los KPI de reclusos, manillas, eventos y alertas.",
+   "estado": "PASS",
+   "observacion": "2 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Consultar GET /api/dashboard",
+     "observado": "HTTP 200 en 139 ms; KPI: {'alertas_criticas': 20, 'alertas_pendientes': 32, 'con_perfil': 3, 'eventos': 129, 'eventos_fallidos': 32, 'manillas_asignadas': 11, 'manillas_en_linea': 1, 'reclusos': 17}",
+     "estado": "PASS",
+     "ms": 139,
+     "captura": null
+    },
+    {
+     "n": 2,
+     "accion": "Comprobar que los KPI son números no negativos",
+     "observado": "todos válidos",
+     "estado": "PASS",
+     "ms": 0,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.15,
+   "fin": "2026-11-17 02:43:04"
+  },
+  {
+   "id": "TC-API-10",
+   "nombre": "Huella dactilar con sensor R307 real",
+   "suites": [
+    "regression",
+    "integration"
+   ],
+   "tipo": "funcional",
+   "modulo": "Biometría (huella)",
+   "objetivo": "Verificar la captura con el sensor físico R307.",
+   "precondiciones": "Sensor R307 conectado (HUELLA_MODO=r307). Fuera del alcance: no se prueba hardware.",
+   "datos": "GET /api/huella/estado",
+   "resultado_esperado": "Se omite (SKIPPED) si el sensor no está conectado.",
+   "estado": "SKIPPED",
+   "observacion": "Sensor de huella no conectado (modo simulado). El hardware está fuera del alcance de estas pruebas.",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Consultar el estado del lector de huella",
+     "observado": "modo=simulado: Huella simulada: todavía no hay sensor conectado",
+     "estado": "PASS",
+     "ms": 203,
+     "captura": null
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 0.21,
+   "fin": "2026-11-17 02:43:04"
+  },
+  {
+   "id": "TC-E2E-01",
+   "nombre": "Inicio de sesión en el panel y Centro de monitoreo visible",
+   "suites": [
+    "smoke",
+    "e2e",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Panel web · Autenticación",
+   "objetivo": "Comprobar de punta a punta que el administrador entra al panel y ve el Centro de monitoreo.",
+   "precondiciones": "SIBIO-RFID encendido con el panel compilado y datos de demostración.",
+   "datos": "Usuario qa_admin / contraseña y código 2FA de la app autenticadora (si lo tiene)",
+   "resultado_esperado": "Se muestra el título 'Centro de monitoreo' y el KPI 'Reclusos activos'.",
+   "estado": "PASS",
+   "observacion": "5 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Abrir el panel y escribir usuario y contraseña (administrador: qa_admin)",
+     "observado": "Formulario enviado",
+     "estado": "PASS",
+     "ms": 2824,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-01\\paso01.jpg"
+    },
+    {
+     "n": 2,
+     "accion": "Escribir el código de 6 dígitos del autenticador (2FA)",
+     "observado": "Código escrito; el panel lo verifica solo al completar los 6 dígitos",
+     "estado": "PASS",
+     "ms": 23906,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-01\\paso02.jpg"
+    },
+    {
+     "n": 3,
+     "accion": "Verificar que se entró al sistema (menú lateral visible)",
+     "observado": "Sesión iniciada; menú lateral visible",
+     "estado": "PASS",
+     "ms": 825,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-01\\paso03.jpg"
+    },
+    {
+     "n": 4,
+     "accion": "Verificar el título 'Centro de monitoreo'",
+     "observado": "Título visible",
+     "estado": "PASS",
+     "ms": 16,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-01\\paso04.jpg"
+    },
+    {
+     "n": 5,
+     "accion": "Verificar el indicador 'Reclusos activos'",
+     "observado": "KPI visible",
+     "estado": "PASS",
+     "ms": 12,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-01\\paso05.jpg"
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 39.9,
+   "fin": "2026-11-17 02:43:45"
+  },
+  {
+   "id": "TC-E2E-02",
+   "nombre": "Contraseña incorrecta muestra un mensaje de error claro",
+   "suites": [
+    "e2e",
+    "sanity",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Panel web · Autenticación",
+   "objetivo": "Verificar que el panel informa el error sin dejar entrar.",
+   "precondiciones": "SIBIO-RFID encendido.",
+   "datos": "Usuario aleatorio qa_xxxx con contraseña errónea",
+   "resultado_esperado": "Aparece el aviso 'Usuario o contraseña incorrectos' y se sigue en la pantalla de ingreso.",
+   "estado": "PASS",
+   "observacion": "5 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Abrir la página de inicio de sesión del panel",
+     "observado": "Formulario visible en http://127.0.0.1:5000/",
+     "estado": "PASS",
+     "ms": 1492,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-02\\paso01.jpg"
+    },
+    {
+     "n": 2,
+     "accion": "Escribir el usuario 'qa_3040' y la contraseña",
+     "observado": "Campos completados (la contraseña se muestra oculta)",
+     "estado": "PASS",
+     "ms": 588,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-02\\paso02.jpg"
+    },
+    {
+     "n": 3,
+     "accion": "Pulsar el botón Ingresar",
+     "observado": "Formulario enviado",
+     "estado": "PASS",
+     "ms": 394,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-02\\paso03.jpg"
+    },
+    {
+     "n": 4,
+     "accion": "Verificar el mensaje de error",
+     "observado": "Aviso: 'Usuario o contraseña incorrectos. Le quedan 4 intentos antes del bloqueo temporal.'",
+     "estado": "PASS",
+     "ms": 64,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-02\\paso04.jpg"
+    },
+    {
+     "n": 5,
+     "accion": "Verificar que no se entró al sistema",
+     "observado": "El formulario de ingreso sigue visible",
+     "estado": "PASS",
+     "ms": 11,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-02\\paso05.jpg"
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 3.6,
+   "fin": "2026-11-17 02:43:49"
+  },
+  {
+   "id": "TC-E2E-03",
+   "nombre": "Buscar un recluso desde el módulo Reclusos",
+   "suites": [
+    "e2e",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Panel web · Reclusos",
+   "objetivo": "Comprobar la navegación al módulo Reclusos y la búsqueda por apellido.",
+   "precondiciones": "Operador de pruebas (qa_operador) del penal 1; existe Carlos Quispe Choque (SP-0412).",
+   "datos": "Texto de búsqueda: 'Quispe'",
+   "resultado_esperado": "La lista muestra al recluso con código SP-0412.",
+   "estado": "PASS",
+   "observacion": "5 pasos verificados",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Abrir el panel y escribir usuario y contraseña (operador: qa_operador)",
+     "observado": "Formulario enviado",
+     "estado": "PASS",
+     "ms": 2130,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-03\\paso01.jpg"
+    },
+    {
+     "n": 2,
+     "accion": "Verificar que se entró al sistema (menú lateral visible)",
+     "observado": "Sesión iniciada; menú lateral visible",
+     "estado": "PASS",
+     "ms": 817,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-03\\paso02.jpg"
+    },
+    {
+     "n": 3,
+     "accion": "Abrir el módulo 'Reclusos' desde el menú",
+     "observado": "Módulo 'Reclusos' abierto",
+     "estado": "PASS",
+     "ms": 1440,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-03\\paso03.jpg"
+    },
+    {
+     "n": 4,
+     "accion": "Escribir 'Quispe' en el buscador",
+     "observado": "Búsqueda aplicada",
+     "estado": "PASS",
+     "ms": 1112,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-03\\paso04.jpg"
+    },
+    {
+     "n": 5,
+     "accion": "Verificar que aparece SP-0412",
+     "observado": "SP-0412 visible en la lista",
+     "estado": "PASS",
+     "ms": 21,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-03\\paso05.jpg"
+    }
+   ],
+   "paso_fallido": null,
+   "duracion_s": 8.06,
+   "fin": "2026-11-17 02:43:57"
+  },
+  {
+   "id": "TC-E2E-04",
+   "nombre": "[FAIL controlado] El Centro de monitoreo no debe tener alertas pendientes",
+   "suites": [
+    "e2e",
+    "regression"
+   ],
+   "tipo": "funcional",
+   "modulo": "Panel web · Alertas",
+   "objetivo": "Caso preparado A PROPÓSITO para fallar y demostrar cómo se reporta un FAIL: los datos de demostración siempre tienen alertas pendientes.",
+   "precondiciones": "Supervisor de pruebas (qa_supervisor); datos de demostración con alertas pendientes.",
+   "datos": "Valor esperado del KPI 'Alertas pendientes': 0",
+   "resultado_esperado": "FAIL esperado: el KPI muestra un número mayor que 0. Sirve para ver el paso fallido y su captura.",
+   "estado": "FAIL",
+   "observacion": "Fallo funcional: se esperaban 0 alertas pendientes y el panel muestra 32",
+   "pasos": [
+    {
+     "n": 1,
+     "accion": "Abrir el panel y escribir usuario y contraseña (supervisor: qa_supervisor)",
+     "observado": "Formulario enviado",
+     "estado": "PASS",
+     "ms": 2112,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-04\\paso01.jpg"
+    },
+    {
+     "n": 2,
+     "accion": "Verificar que se entró al sistema (menú lateral visible)",
+     "observado": "Sesión iniciada; menú lateral visible",
+     "estado": "PASS",
+     "ms": 821,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-04\\paso02.jpg"
+    },
+    {
+     "n": 3,
+     "accion": "Leer el KPI 'Alertas pendientes'",
+     "observado": "KPI 'Alertas pendientes' = 32",
+     "estado": "PASS",
+     "ms": 1532,
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-04\\paso03.jpg"
+    },
+    {
+     "n": 4,
+     "accion": "Verificar que el KPI es 0 (FAIL controlado)",
+     "observado": "AssertionError: se esperaban 0 alertas pendientes y el panel muestra 32",
+     "estado": "FAIL",
+     "captura": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW\\capturas\\TC-E2E-04\\paso04-fallo.jpg",
+     "ms": 149
+    }
+   ],
+   "paso_fallido": 4,
+   "duracion_s": 6.81,
+   "fin": "2026-11-17 02:44:07"
+  }
+ ],
+ "informe": {
+  "html": "Reporte-EJ-20261117-024248-DW.html",
+  "pdf": "Reporte-EJ-20261117-024248-DW.pdf"
+ },
+ "correo_estado": "enviado",
+ "correo_detalle": "Enviado a [correo oculto]",
+ "salida": "C:\\Users\\ALEXANDER\\Documents\\sistema-biometrico\\Proyecto-Automatizacion-TQA\\reportes\\EJ-20261117-024248-DW",
+ "resumen": {
+  "PASS": 12,
+  "FAIL": 1,
+  "ERROR": 0,
+  "SKIPPED": 1,
+  "NOT RUN": 0,
+  "total": 14,
+  "exito_pct": 92
+ },
+ "resumen_ia": "TC-E2E-04: La causa probable es una discrepancia entre el estado esperado del panel y los datos reales, mostrando 32 alertas en lugar de cero. Este caso se clasifica como un FAIL funcional y requiere revisar la lógica de sincronización del KPI de alertas en el Centro de Monitoreo. Es importante notar que este es un FAIL controlado, incluido intencionalmente para validar la generación de reportes ante fallos.\n\nEn conclusión, la versión demuestra una alta estabilidad y calidad, dado que el único fallo reportado fue provocado deliberadamente para fines de demostración."
+}
