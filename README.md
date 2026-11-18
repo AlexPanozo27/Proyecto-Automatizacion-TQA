@@ -54,7 +54,7 @@ Al terminar cada ejecución con fallos, la IA escribe un **análisis de fallos**
 
 Proveedor: **Gemini** (clave gratuita en aistudio.google.com) o Claude, configurado en `.env`. Sin clave existe el modo `simulado`, con respuestas fijas, solo para probar la pantalla.
 
-## Casos de prueba (22)
+## Casos de prueba (30 + demostraciones)
 
 | Suite | Casos |
 |---|---|
@@ -67,14 +67,29 @@ Proveedor: **Gemini** (clave gratuita en aistudio.google.com) o Claude, configur
 | Estrés | TC-NF-02 (50 usuarios simultáneos, error ≤ 1 %) |
 | Soak | TC-NF-03 (carga sostenida, sin degradarse) |
 | Retesting | TC-RT-01 a 05: vuelven a probar BUG-001 a BUG-005 del Entregable 1. Dan FAIL mientras el defecto siga abierto en SIBIO y PASS cuando se corrija |
+| Seguridad | TC-SEG-01 a 08: cadena de auditoría HMAC-SHA256, bitácora inalterable, bloqueo tras 5 intentos, 2FA, inyección SQL, cierre de sesión, datos sensibles y errores sin trazas. Ejecutar una vez seguida (TC-SEG-04 envía un código 2FA falso) |
+| Autocuración (demo) | TC-AC-01: usa un localizador de una versión anterior del panel; la IA propone el nuevo, el tester aprueba y se vuelve a ejecutar. Botón "Restaurar demo" para dejarlo como estaba |
+| Generadas por IA | TC-IA-NN: casos creados con el asistente (caso en español → Gherkin → código Playwright con localizadores reales), guardados en `tests/generados/` |
 
 Los casos viven en `tests/`. Cada uno tiene su ficha con `@caso(...)` (ID, suites, objetivo, precondiciones, datos, resultado esperado); la web lee el catálogo directamente de las pruebas, así que agregar un caso nuevo no requiere tocar la web.
+
+## Evidencias y documentación
+
+- `evidencias/`: ejecuciones reales EV-01 a EV-10 (PDF por caso, HTML resumen, `ejecucion.json` y `resultados.jsonl` con cada paso), Selenium, Locust, capacidad por escalones y pruebas manuales. Ver `evidencias/README.md`.
+- `docs/Capitulo6-Estrategia-y-Ejecucion-de-Pruebas-SIBIO-RFID.pdf`: el capítulo 6 (plan, automatización, no funcionales, ejecución, trazabilidad, resultados y anexos).
+- `ejemplos/`: un informe PDF y HTML de muestra con el FAIL controlado.
+
+Resumen (17-18/11/2026): Smoke 5/5 PASS · Regresión 12 PASS, 1 FAIL controlado, 1 SKIPPED · Seguridad 8/8 PASS · No funcionales 3/3 PASS · Retesting 5 FAIL (defectos aún abiertos en SIBIO) · Locust 30 usuarios: 0 errores, p95 260 ms · Capacidad: unos 100 operadores activos, techo de unas 41 pet/s (el login es el cuello de botella).
+
+## Jarvis (asistente con voz)
+
+Botón flotante en la web. Responde con datos reales del proyecto (catálogo, historial, documentación de la API de SIBIO), ejecuta suites por orden ("corre el Smoke", con confirmación), narra el avance con voz, explica cada fallo y ofrece "Hazlo tú" (bug report, reparar, reintentar) o "Explícame cómo". Dictado por voz: usar Microsoft Edge (Brave no trae reconocimiento de voz).
 
 ## Cómo ejecutar (Windows)
 
 1. Encender SIBIO-RFID con datos de demostración (`iniciar.bat` en `sistema-biometrico\backend`).
 2. En esta carpeta: doble clic en **`instalar.bat`** (solo la primera vez).
-3. Abrir `.env` y poner el correo SMTP (puede ser el mismo Gmail y contraseña de aplicación de SIBIO).
+3. Abrir `.env` (lo crea `instalar.bat` a partir de `config/config.example.env`), reemplazar `CAMBIAR_POR_LA_CLAVE_DEMO` por la clave de los usuarios de demostración de SIBIO (`SIBIO_ADMIN_CLAVE`, `SIBIO_OPERADOR_CLAVE`, `SIBIO_SUPERVISOR_CLAVE`; la clave no se publica en este repositorio) y poner el correo SMTP (puede ser el mismo Gmail y contraseña de aplicación de SIBIO).
 4. Doble clic en **`iniciar.bat`**: se abre `http://127.0.0.1:8080`.
 
 Sin interfaz (por consola):
@@ -116,6 +131,16 @@ tests/soporte.py        @caso, pasos con evidencia y cliente de la API
 tests/api/              Pruebas funcionales de la API
 tests/e2e/              Pruebas del panel con Playwright
 tests/no_funcional/     Rendimiento, estrés y soak
+tests/seguridad/        Pruebas de seguridad (TC-SEG)
+tests/demo/             Demostración de autocuración (TC-AC-01)
+tests/generados/        Casos creados con el asistente de IA (TC-IA)
+motor/ia.py             IA: Gherkin, código, resumen de fallos, bug report, autocuración
+motor/jarvis.py         Asistente conversacional
+motor/explorador.py     Mapa de localizadores reales del panel
+complementos/           Selenium WebDriver y Locust
+config/                 config.example.env (sin secretos)
+docs/                   Capítulo 6, conocimiento de Jarvis, mejoras propuestas
+evidencias/             EV-01 a EV-10 y pruebas manuales
 reportes/               Una carpeta por ejecución (no se sube a GitHub)
 legado/                 Script del Entregable 1 (versión anterior, solo referencia)
 ```
