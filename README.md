@@ -127,7 +127,7 @@ La guía detallada está en `sibio-rfid\GUIA_INSTALACION.md`. Resumen:
    - Base de datos: `1` PostgreSQL (si está instalado) o `2` SQLite (más rápido para probar).
    - Contraseña del usuario `admin`: inventarla (mínimo 8 caracteres) y **anotarla**: se usa en el paso 3.
    - ¿Cargar datos de demostración?: Enter (**sí**; las pruebas necesitan esos datos).
-2. **Panel web** (una sola vez): el panel React se compila y el mismo servidor de SIBIO lo sirve.
+2. **Panel web**: al terminar, el mismo `instalar.bat` compila el panel React (`npm install` + `npm run build`) si Node.js está instalado; el servidor de SIBIO lo sirve en el puerto 5000. Si no había Node.js o falló la compilación, hacerlo a mano una vez:
    ```
    cd C:\proyectos\sibio-rfid\frontend-v2
    npm install
