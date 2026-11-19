@@ -35,7 +35,7 @@ Desde la web se elige el **tipo de prueba** (funcional o no funcional), una **su
 | Datos de prueba sin publicar secretos | [Datos de prueba](#datos-de-prueba); `config/config.example.env` no trae claves reales |
 | Ejemplos de reportes con PASS y al menos un FAIL controlado | `ejemplos/` (Regresión con FAIL controlado) y `evidencias/` (EV-01 a EV-10) |
 | Funcionalidad de IA | `motor/ia.py`, `motor/jarvis.py`, `motor/explorador.py` y `tests/generados/` |
-| Documento de estrategia y ejecución | `docs/Capitulo6-Estrategia-y-Ejecucion-de-Pruebas-SIBIO-RFID.pdf` |
+| Documento del Segundo Entregable (capítulo 6: estrategia y ejecución de pruebas) | [`docs/Segundo Entregable – Proyecto Integrador Fase 2 - Documentacion.pdf`](docs/Segundo%20Entregable%20%E2%80%93%20Proyecto%20Integrador%20Fase%202%20-%20Documentacion.pdf) |
 
 **Funcionalidades:**
 
@@ -306,7 +306,7 @@ Los casos viven en `tests/`. Cada uno tiene su ficha con `@caso(...)` (ID, suite
 ## Evidencias y documentación
 
 - `evidencias/`: ejecuciones reales EV-01 a EV-10 (PDF por caso, HTML resumen, `ejecucion.json` y `resultados.jsonl` con cada paso), Selenium, Locust, capacidad por escalones y pruebas manuales. Ver `evidencias/README.md`.
-- `docs/Capitulo6-Estrategia-y-Ejecucion-de-Pruebas-SIBIO-RFID.pdf`: el capítulo 6 (plan, automatización, no funcionales, ejecución, trazabilidad, resultados y anexos).
+- [`docs/Segundo Entregable – Proyecto Integrador Fase 2 - Documentacion.pdf`](docs/Segundo%20Entregable%20%E2%80%93%20Proyecto%20Integrador%20Fase%202%20-%20Documentacion.pdf): el capítulo 6 (plan, automatización, no funcionales, ejecución, trazabilidad, resultados y anexos).
 - `ejemplos/`: un informe PDF y HTML de muestra con el FAIL controlado.
 
 Resumen (17-18/11/2026): Smoke 5/5 PASS · Regresión 12 PASS, 1 FAIL controlado, 1 SKIPPED · Seguridad 8/8 PASS · No funcionales 3/3 PASS · Retesting 5 FAIL (defectos aún abiertos en SIBIO) · Locust 30 usuarios: 0 errores, p95 260 ms · Capacidad: unos 100 operadores activos, techo de unas 41 pet/s (el login es el cuello de botella).
